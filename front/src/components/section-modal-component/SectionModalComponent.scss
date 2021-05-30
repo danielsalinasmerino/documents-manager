@@ -1,0 +1,228 @@
+.sectionModalWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+
+    .modalHeader {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        
+        width: 95%;
+
+        border-bottom: 2px solid #4664A2;
+
+        .titleHeader {
+            font-size: 22px;
+            font-weight: 600;
+
+            color: #4664A2;
+        }
+
+        .closeModal {
+            width: 24px;
+            height: 24px;
+
+            cursor: pointer;
+        }
+    }
+
+    .modalText {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        
+        width: 85%;
+
+        padding-top: 30px;
+        padding-bottom: 30px;
+
+        .text {
+            font-size: 18px;
+            font-weight: 500;
+
+            color: #4664A2;
+        }
+    }
+
+    .inputWrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        width: 95%;
+
+        margin-top: 10px;
+
+        .inputTitle {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 12px !important;
+
+            color: #4664A2;
+        }
+
+        .inputSubTitle {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 7px !important;
+
+            color: #4664A2;
+        }
+
+        .inputLine {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+
+            width: 100%;
+        }
+
+        .lineText {
+            width: 35%;
+
+            font-size: 16px;
+            font-weight: 500;
+            color: #4664A2;
+        }
+
+        .lineTextFullWidth {
+            width: 100%;
+
+            font-size: 16px;
+            font-weight: 500;
+            color: #4664A2;
+        }
+
+        .ownInput {
+            width: 100%;
+            padding: 10px 5px;
+            border:none;
+            border-bottom: 1px solid #e2e2e2;
+
+            font-size: 18px;
+            font-weight: 500;
+
+            background-color: #fbfbfb;  
+        }
+
+        .ownInputHalf {
+            width: 70%;
+        }
+        
+        .ownInput:focus {
+            outline: none;
+        }
+
+        .ownInputFile {
+            margin-bottom: 10px;
+        }
+
+        .smallFontSize {
+            font-size: 16px;
+        }
+
+        .ownTextarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px 5px;
+            border:none;
+            border-bottom: 1px solid #e2e2e2;
+
+            font-size: 18px;
+            font-weight: 500;
+
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            background-color: #fbfbfb;
+        }
+
+        .ownTextarea:focus {
+            outline: none;
+        }
+
+        .contentLength {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+
+            width: 100%;
+            margin-top: 7px;
+
+            font-size: 14px;
+            font-weight: 400;
+
+            color: #4664A2;
+        }
+
+        .errorContentLength {
+            color: red; 
+        }
+
+        .ownSelector {
+            width: 100%;
+            padding: 10px 5px;
+            border:none;
+
+            font-size: 18px;
+            font-weight: 500;
+
+            background-color: #fbfbfb;  
+        }
+
+        .error {
+            border-bottom: 1px solid red;
+            color: red;
+        }
+
+        .error::placeholder {
+            color: red;
+        }
+        
+    }
+
+    .bottomWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: flex-end;
+
+        width: 100%;
+    }
+
+}
+
+.smallMarginLeft {
+    margin-left: 10px;
+}
+
+.marginLeft {
+    margin-left: 25px;
+}
+
+.smallMarginTop {
+    margin-top: 10px;
+}
+
+.marginTop {
+    margin-top: 25px;
+}
+
+.optionDocumentImage {
+    width: 24px !important;
+    height: 24px !important;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.fullWidth {
+    width: 100%;
+}

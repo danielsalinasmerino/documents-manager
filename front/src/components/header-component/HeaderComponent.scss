@@ -1,0 +1,89 @@
+.headerMainWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    min-height: 90px;
+    width: 100%;
+
+    margin-top: 10px;
+
+    background-color: #4664A2;
+
+    .logosWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        height: 100%;
+        width: 20%;
+
+        .logo {
+            width: 70px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+    }
+
+    .infoWrapper {
+
+        .title {
+            font-size: 24px;
+            font-weight: 500;
+            color: white;
+
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+
+        .sub {
+            margin-top: -17px;
+
+            font-size: 18px;
+            font-weight: 400;
+            color: white;
+
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+
+        a {
+            color: white;
+        }
+        
+        a:link {
+            text-decoration: none;
+        }
+        
+        a:visited {
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        a:active {
+            text-decoration: underline;
+        }
+    }
+
+    .optionsWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+
+        height: 100%;
+        width: 20%;
+
+        .optionsIcon {
+            width: 32px;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+    }
+
+    
+}

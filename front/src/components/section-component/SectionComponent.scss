@@ -1,0 +1,109 @@
+
+.sectionWrapper {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 90%;
+
+    .sectionMain {
+
+        width: calc(100% - 100px);
+
+        .sectionTittle {
+            font-size: 20px;
+            font-weight: 400;
+            margin-left: 20px;
+        
+            margin-top: 5px !important;
+        
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+        
+        .sectionDescription {
+            font-size: 14px;
+            font-weight: 400;
+            margin-left: 35px;
+        
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        
+            white-space: pre-line;
+            white-space: pre-wrap;
+        }
+        
+        .sectionDocumentsList {
+            font-size: 16px;
+            font-weight: 400;
+            margin-left: 45px;
+        
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        
+            li {
+                margin-bottom: 7px;
+            }
+        
+            a {
+                color: #337ab7;
+            }
+            
+            a:link {
+                text-decoration: none;
+            }
+            
+            a:visited {
+                text-decoration: none;
+            }
+            
+            a:hover {
+                text-decoration: underline;
+            }
+            
+            a:active {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .sectionOptions {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+
+        width: 100px !important;
+
+        .sectionOption {
+            width: 24px !important;
+            height: 24px !important;
+            padding: 5px;
+            margin-left: 15px;
+
+            border: 1px solid #337ab7;
+
+            .optionImage {
+                width: 24px !important;
+                height: 24px !important;
+            }
+        }
+
+        .sectionOption:hover {
+            background-color:  #337ab7;
+        }
+    }
+}
+
+.editable {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+
+    border: 1px solid #337ab7;
+    border-bottom: 5px solid #337ab7;
+    border-right: 5px solid #337ab7;
+}

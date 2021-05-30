@@ -1,0 +1,33 @@
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  margin-left: 25px;
+  margin-right: 25px;
+
+  .buttonsMenu {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .editionView {
+    margin-bottom: 30px;
+  }
+  
+  h1 {
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .link-clean {
+    text-decoration: none;
+  }
+
+}
