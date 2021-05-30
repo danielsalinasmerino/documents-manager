@@ -6,10 +6,11 @@ var app = require('./app');
 
 // Other imports
 const functions = require('./helpers/functions/functions');
+const variables = require('./environment');
 
 // Environment variables
-const port = 3000;
-const connectionDB = 'mongodb://localhost:27017/documents-manager';
+const port = variables.variables.port;
+const connectionDB = variables.variables.connection;
 
 // Required models
 var Section = require('./models/section');
