@@ -1,7 +1,7 @@
 version: '3'
 services:
   react:
-    container_name: front-documents-manager-docker-container
+    container_name: front_documents_manager
     build:
       context: ./front
       dockerfile: Dockerfile
@@ -10,7 +10,7 @@ services:
     links:
       - node
   node:
-    container_name: back-documents-manager
+    container_name: back_documents_manager
     restart: always
     build: ./back
     ports:
@@ -20,7 +20,11 @@ services:
     volumes:
         - .:/usr/src/app
   mongo:
-    container_name: db-documents-manager
+    container_name: db_documents_manager
     image: mongo
     ports:
       - "27017:27017"
+    volumes:
+      - db_documents_manager:/data/db
+volumes:
+  db_documents_manager:
