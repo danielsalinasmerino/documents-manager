@@ -7,14 +7,28 @@ import './EditorsManagementComponent.scss';
 
 function EditorsManagementComponent({ portalName }) {
 
-    return (
-        <div className="main-wrapper">
-            <HeaderComponent portalName={portalName}/>
-            <h1>Bienvenido/a a la vista de gestión de editores</h1>
-            <EditorsManagementButtonsMenuComponent/>
-            {/* <EditionButtonsMenuComponent openModalCallback={openModal}/>
+    return (
+        <div className="main-wrapper">
+            <HeaderComponent portalName={portalName} />
+            <h1>Bienvenido/a a la vista de gestión de editores</h1>
+            <EditorsManagementButtonsMenuComponent />
+            <table className="editors-table">
+                <tr className="title-row">
+                    <th className="title-element">Correo</th>
+                    <th className="title-element">Dato Extra</th>
+                    <th className="title-element" colSpan="2">Opciones</th>
+                </tr>
+                <tr className="content-row">
+                    <td className="content-element">Jill</td>
+                    <td className="content-element">Smith</td>
+                    <td className="content-element">Editar</td>
+                    <td className="content-element">Eliminar</td>
+                </tr>
+            </table>
+            {/* <EditionButtonsMenuComponent openModalCallback={openModal}/>
             <SectionsComponent sections={sections} documents={documents} editableSections={true} editSectionCallback={openModal} deleteSectionCallback={openDeleteSectionModal}/>
-             */}{/* Modal to create or edit a section */}
+             */}
+            {/* Modal to create or edit a section */}
             {/* <Modal
               isOpen={modalIsOpen}
               onRequestClose={() => closeModal(true)}
@@ -43,8 +57,8 @@ function EditorsManagementComponent({ portalName }) {
                 closeDeleteSectionModal={closeDeleteSectionModal}
                 confirmDeleteSection={confirmDeleteSection}/>
             </Modal> */}
-        </div>
-    );
+        </div>
+    );
 }
 
 export default EditorsManagementComponent;

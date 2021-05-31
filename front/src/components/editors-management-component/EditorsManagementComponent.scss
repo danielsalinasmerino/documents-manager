@@ -1,0 +1,32 @@
+.editors-table {
+    width: 100%;
+    border: 1px solid #4664A2;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    .title-row {
+        height: 50px;
+        text-align: left;
+        background-color: #4664A2;
+        
+
+        .title-element {
+            padding: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: white;
+        }
+    }
+
+    .content-row {
+        height: 40px;
+        border: 1px solid #4664A2;
+        text-align: left;
+
+        .content-element {
+            padding: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+}
