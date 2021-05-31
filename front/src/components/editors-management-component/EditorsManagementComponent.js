@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import EditorsManagementButtonsMenuComponent from '../editors-management-buttons-menu-component/EditorsManagementButtonsMenuComponent';
 import HeaderComponent from '../header-component/HeaderComponent';
 
 import './EditorsManagementComponent.scss';
@@ -10,6 +11,7 @@ function EditorsManagementComponent({ portalName }) {
         <div className="main-wrapper">
             <HeaderComponent portalName={portalName}/>
             <h1>Bienvenido/a a la vista de gestión de editores</h1>
+            <EditorsManagementButtonsMenuComponent/>
             {/* <EditionButtonsMenuComponent openModalCallback={openModal}/>
             <SectionsComponent sections={sections} documents={documents} editableSections={true} editSectionCallback={openModal} deleteSectionCallback={openDeleteSectionModal}/>
              */}{/* Modal to create or edit a section */}
