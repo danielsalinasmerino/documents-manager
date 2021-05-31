@@ -9,7 +9,7 @@ function PreviewButtonsMenuComponent() {
 
     return (
         <div className="buttonsMenu">
-            <Link className="link-clean" to="/pas/gestor-documental/edition">
+            <Link className="link-clean" to="/pas/gestor-documental/edicion-contenidos">
                 <StyledButtonComponent buttonText={'Volver a Vista de Edición'} />
             </Link>
         </div>

@@ -44,14 +44,17 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/pas/gestor-documental/preview">
+        <Route path="/pas/gestor-documental/vista-previa">
           <PreviewComponent portalName={portalName} sections={sections} documents={documents}/>
         </Route>
-        <Route path="/pas/gestor-documental/edition">
+        <Route path="/pas/gestor-documental/edicion-contenidos">
+          <EditionComponent portalName={portalName} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments}/>
+        </Route>
+        <Route path="/pas/gestor-documental/gestion-editores">
           <EditionComponent portalName={portalName} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments}/>
         </Route>
       </Switch>
-      <Redirect to="/pas/gestor-documental/edition"/>
+      <Redirect to="/pas/gestor-documental/edicion-contenidos"/>
     </Router>
   );
 }
