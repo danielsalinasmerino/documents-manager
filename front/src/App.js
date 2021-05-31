@@ -7,7 +7,9 @@ import {
 import React, { useEffect, useState } from 'react';
 
 import EditionComponent from './components/edition-component/EditionComponent';
+import EditorsManagementComponent from './components/editors-management-component/EditorsManagementComponent';
 import PreviewComponent from './components/preview-component/PreviewComponent';
+
 
 import { sortArrayOfSectionsByPosition } from './helpers/functions/functions';
 import { readSectionsEndpoint, readDocumentsEndpoint } from './services/endpoints';
@@ -51,7 +53,7 @@ function App() {
           <EditionComponent portalName={portalName} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments}/>
         </Route>
         <Route path="/pas/gestor-documental/gestion-editores">
-          <EditionComponent portalName={portalName} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments}/>
+          <EditorsManagementComponent portalName={portalName}/>
         </Route>
       </Switch>
       <Redirect to="/pas/gestor-documental/edicion-contenidos"/>
