@@ -17,7 +17,8 @@ const connectionDB = variables.variables.connection;
 const path = require('path');
 const express = require('express');
 
-app.use(express.static(path.resolve(__dirname, './client/build')));
+//app.use(express.static(path.resolve(__dirname, './client/build')));
+app.use('/pas/gestor-documental', express.static(path.join(__dirname, './client/build')));
 
 mongoose.Promise = global.Promise;
 // Connecting to the DB
