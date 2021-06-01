@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logoEtsit from '../../assets/images/header/logo-etsit.png'; 
+import logoEtsit from './../../assets/images/header/logo-etsit.png'; 
 import logoUPM from '../../assets/images/header/LOGO-UPM-WT.png'; 
 import optionsIcon from '../../assets/images/header/options.png';
 import { upmLink, etsitLink } from '../../helpers/constants/links';
