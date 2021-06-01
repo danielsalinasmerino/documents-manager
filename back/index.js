@@ -3,7 +3,8 @@
 // Required modules
 var mongoose = require('mongoose');
 var app = require('./app');
-require('dotenv').config()
+const normalize = require('normalize-path');
+require('dotenv').config();
 
 // Other imports
 const functions = require('./helpers/functions/functions');
@@ -18,7 +19,8 @@ const path = require('path');
 const express = require('express');
 
 //app.use(express.static(path.resolve(__dirname, './client/build')));
-app.use('/pas/gestor-documental', express.static(path.join(__dirname, 'client/build')));
+app.use(normalize('/pas/gestor-documental'), express.static(path.join(__dirname, 'client/build')));
+console.log(express.static(path.join(__dirname, 'client/build'))
 
 mongoose.Promise = global.Promise;
 // Connecting to the DB
