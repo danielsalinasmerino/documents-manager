@@ -2,6 +2,7 @@
 
 // Required modules
 var express = require("express");
+const normalize = require('normalize-path');
 
 // We create our App
 var app = express();
