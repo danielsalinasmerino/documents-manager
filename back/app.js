@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 // Routing
-const routingStart = '/api';
+const routingStart = normalize('/pas/gestor-documental') + '/api';
 app.use(routingStart, sections_routes);
 app.use(routingStart, documents_routes);
 
