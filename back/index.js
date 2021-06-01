@@ -3,6 +3,7 @@
 // Required modules
 var mongoose = require('mongoose');
 var app = require('./app');
+require('dotenv').config()
 
 // Other imports
 const functions = require('./helpers/functions/functions');
