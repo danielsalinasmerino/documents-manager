@@ -8,11 +8,10 @@ require('dotenv').config();
 
 // Other imports
 const functions = require('./helpers/functions/functions');
-const variables = require('./environment');
 
 // Environment variables
-const port = variables.variables.port;
-const connectionDB = variables.variables.connection;
+const port = process.env.PORT;
+const connectionDB = process.env.CONNECTION_DB;
 
 // Use React app
 const path = require('path');
