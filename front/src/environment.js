@@ -4,6 +4,6 @@
 const dockerDeploy = true; //change to false when you are working on local 
 
 export const variables = {
-    endpointStart: (dockerDeploy) ? ('https://pruebas.etsit.upm.es/pas/gestor-documental/api/') : ("http://localhost:8080/api/"),
+    endpointStart: (dockerDeploy) ? ('https://pruebas.etsit.upm.es/pas/gestor-documental/api/') : ("http://localhost:3009/api/"),
     //port: 3009, (YOU CAN CHECK THIS ON docker-compose.yml)
 }

@@ -3,6 +3,7 @@
 // Required modules
 var express = require("express");
 const normalize = require('normalize-path');
+require('dotenv').config();
 
 // We create our App
 var app = express();
@@ -15,10 +16,17 @@ const documents_routes = require('./routes/document');
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
+// Environment variables
+const dev_environment = process.env.DEV;
+
 // Use React app
 const path = require('path');
-//app.use(normalize('/pas/gestor-documental'), express.static(path.resolve(__dirname, './client/build')));
-app.use(normalize('/pas/gestor-documental'), express.static(path.join(__dirname, 'client/build')));
+if(dev_environment){
+    app.use(normalize('/pas/gestor-documental'), express.static(path.resolve(__dirname, './client/build')));
+}
+else {
+    app.use(normalize('/pas/gestor-documental'), express.static(path.join(__dirname, 'client/build')));
+}
 
 // CORS
 app.use((req, res, next) => {
