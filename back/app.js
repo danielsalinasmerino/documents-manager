@@ -16,7 +16,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 // Use React app
 const path = require('path');
-const express = require('express');
 app.use(normalize('/pas/gestor-documental'), express.static(path.join(__dirname, 'client/build')));
 
 // CORS
