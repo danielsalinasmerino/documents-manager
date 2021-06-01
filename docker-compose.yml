@@ -1,20 +1,11 @@
 version: '3'
 services:
-  react:
-    container_name: front_documents_manager
-    build:
-      context: ./front
-      dockerfile: Dockerfile
-    ports:
-      - '3009:3000'
-    links:
-      - node
   node:
     container_name: back_documents_manager
     restart: always
     build: ./back
     ports:
-      - "8080:8080"
+      - "3000:3000"
     links:
       - mongo
     volumes:
