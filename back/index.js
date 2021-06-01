@@ -12,6 +12,12 @@ const variables = require('./environment');
 const port = variables.variables.port;
 const connectionDB = variables.variables.connection;
 
+// Use React app
+const path = require('path');
+const express = require('express');
+
+app.use(express.static(path.resolve(__dirname, './client/build')));
+
 mongoose.Promise = global.Promise;
 // Connecting to the DB
 mongoose.connect(connectionDB)
