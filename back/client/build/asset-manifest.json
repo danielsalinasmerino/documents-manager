@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.44a9c932.chunk.css",
-    "main.js": "/static/js/main.9d4efbf5.chunk.js",
-    "main.js.map": "/static/js/main.9d4efbf5.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.6a6f68a8.js",
-    "runtime-main.js.map": "/static/js/runtime-main.6a6f68a8.js.map",
-    "static/js/2.2e2a4d89.chunk.js": "/static/js/2.2e2a4d89.chunk.js",
-    "static/js/2.2e2a4d89.chunk.js.map": "/static/js/2.2e2a4d89.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.44a9c932.chunk.css.map": "/static/css/main.44a9c932.chunk.css.map",
-    "static/js/2.2e2a4d89.chunk.js.LICENSE.txt": "/static/js/2.2e2a4d89.chunk.js.LICENSE.txt",
-    "static/media/add.d1b3ea9c.png": "/static/media/add.d1b3ea9c.png",
-    "static/media/delete-white.46c72a1c.png": "/static/media/delete-white.46c72a1c.png",
-    "static/media/delete.0fb6001e.png": "/static/media/delete.0fb6001e.png",
-    "static/media/edit-white.8c45a6f3.png": "/static/media/edit-white.8c45a6f3.png",
-    "static/media/edit.04167798.png": "/static/media/edit.04167798.png",
-    "static/media/logo-etsit.ecbec21c.png": "/static/media/logo-etsit.ecbec21c.png"
+    "main.css": "./static/css/main.44a9c932.chunk.css",
+    "main.js": "./static/js/main.a0e71f0d.chunk.js",
+    "main.js.map": "./static/js/main.a0e71f0d.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.730140d0.js",
+    "runtime-main.js.map": "./static/js/runtime-main.730140d0.js.map",
+    "static/js/2.2e2a4d89.chunk.js": "./static/js/2.2e2a4d89.chunk.js",
+    "static/js/2.2e2a4d89.chunk.js.map": "./static/js/2.2e2a4d89.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.44a9c932.chunk.css.map": "./static/css/main.44a9c932.chunk.css.map",
+    "static/js/2.2e2a4d89.chunk.js.LICENSE.txt": "./static/js/2.2e2a4d89.chunk.js.LICENSE.txt",
+    "static/media/add.d1b3ea9c.png": "./static/media/add.d1b3ea9c.png",
+    "static/media/delete-white.46c72a1c.png": "./static/media/delete-white.46c72a1c.png",
+    "static/media/delete.0fb6001e.png": "./static/media/delete.0fb6001e.png",
+    "static/media/edit-white.8c45a6f3.png": "./static/media/edit-white.8c45a6f3.png",
+    "static/media/edit.04167798.png": "./static/media/edit.04167798.png",
+    "static/media/logo-etsit.ecbec21c.png": "./static/media/logo-etsit.ecbec21c.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.6a6f68a8.js",
+    "static/js/runtime-main.730140d0.js",
     "static/js/2.2e2a4d89.chunk.js",
     "static/css/main.44a9c932.chunk.css",
-    "static/js/main.9d4efbf5.chunk.js"
+    "static/js/main.a0e71f0d.chunk.js"
   ]
 }
