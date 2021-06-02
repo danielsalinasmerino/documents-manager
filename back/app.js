@@ -54,9 +54,10 @@ app.use(session({
 
 // If we are not on DEV (we are on PRUEBAS or PROD), we activate the CAS service
 if (!DEV_ENVIRONMENT) {
-    app.use(cas.bounce, function (req, res, next) {
+    // We desactivate the CAS for the moment
+    /* app.use(cas.bounce, function (req, res, next) {
         next();
-    });
+    }); */
 }
 
 // We configure the routes for the React app
