@@ -4,29 +4,34 @@
 var express = require("express");
 var session = require('express-session');
 const normalize = require('normalize-path');
-require('dotenv').config();
 let CASAuthentication = require('cas-authentication');
+require('dotenv').config();
 
 // Other imports
 const functions = require('./helpers/functions/functions');
 
-// Environment variables
-const contextPath1 = normalize(process.env.CONTEXT1);
-//functions.logWithFormat('contextPath1 ' + contextPath1);
-let service = process.env.SERVICE;
-//functions.logWithFormat('service ' + service);
-let cas_url = process.env.CAS;
-//functions.logWithFormat('cas_url ' + cas_url);
-const dev_environment_string = process.env.DEV;
-//functions.logWithFormat('dev_environment ' + dev_environment);
+// Helpful log
+functions.logWithFormat('Start point for app.js!');
 
+// Environment variables
+const CONTEXT_PATH_1 = normalize(process.env.CONTEXT1);
+//functions.logWithFormat('CONTEXT_PATH_1 ' + CONTEXT_PATH_1);
+const SERVICE = process.env.SERVICE;
+//functions.logWithFormat('SERVICE ' + SERVICE);
+const CAS_URL = process.env.CAS;
+//functions.logWithFormat('CAS_URL ' + CAS_URL);
+const DEV_ENVIRONMENT = (process.env.DEV === 'true');
+//functions.logWithFormat('DEV_ENVIRONMENT ' + DEV_ENVIRONMENT);
+const SESSION_SECRET = process.env.SESSION_SECRET;
+//functions.logWithFormat('SESSION_SECRET ' + SESSION_SECRET);
+
+// CAS configuration
 let cas = new CASAuthentication({
-    cas_url: cas_url,
-    //local o despliegue
-    service_url: service,
+    cas_url: CAS_URL,
+    service_url: SERVICE,
     cas_version: '3.0',
     session_info: 'user',
-    destroy_session: true//me borra la sesión al hacer el logout
+    destroy_session: true
 });
 
 // We create our App
@@ -40,30 +45,27 @@ const documents_routes = require('./routes/document');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Set up an Express session, which is required for CASAuthentication.
+// We set up an Express session, which is required for CASAuthentication.
 app.use(session({
-    secret: 'Secret',
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }));
 
-if (dev_environment_string === 'false') {
-    functions.logWithFormat('Inside Bouncer');
-    functions.logWithFormat('Cas URL: ' + cas.cas_url);
-    functions.logWithFormat('Service URL: ' + cas.service_url);
+// If we are not on DEV (we are on PRUEBAS or PROD), we activate the CAS service
+if (!DEV_ENVIRONMENT) {
     app.use(cas.bounce, function (req, res, next) {
-        functions.logWithFormat('Prior to next');
         next();
     });
 }
 
-// Use React app
+// We configure the routes for the React app
 const path = require('path');
-if (dev_environment_string === 'true') {
-    app.use(normalize(contextPath1), express.static(path.resolve(__dirname, './client/build')));
+if (DEV_ENVIRONMENT) {
+    app.use(normalize(CONTEXT_PATH_1), express.static(path.resolve(__dirname, './client/build')));
 }
 else {
-    app.use(normalize(contextPath1), express.static(path.join(__dirname, 'client/build')));
+    app.use(normalize(CONTEXT_PATH_1), express.static(path.join(__dirname, 'client/build')));
 }
 
 // CORS
@@ -76,7 +78,7 @@ app.use((req, res, next) => {
 });
 
 // Routing
-const routingStart = normalize(contextPath1) + '/api';
+const routingStart = normalize(CONTEXT_PATH_1) + '/api';
 app.use(routingStart, sections_routes);
 app.use(routingStart, documents_routes);
 
