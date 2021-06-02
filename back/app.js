@@ -13,6 +13,9 @@ let service = process.env.SERVICE;
 let cas_url = process.env.CAS;
 const dev_environment = process.env.DEV;
 
+// Other imports
+const functions = require('./helpers/functions/functions');
+
 let cas = new CASAuthentication({
     cas_url: cas_url,
     //local o despliegue
@@ -40,9 +43,12 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
 if (!dev_environment) {
+    functions.logWithFormat('Inside Bouncer');
+    functions.logWithFormat('Cas URL: ' + cas.cas_url);
+    functions.logWithFormat('Service URL: ' + cas.service_url);
     app.use(cas.bounce, function (req, res, next) {
+        functions.logWithFormat('Prior to next');
         next();
     });
 }
