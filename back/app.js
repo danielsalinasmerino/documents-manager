@@ -70,6 +70,10 @@ if (DEV_ENVIRONMENT) {
 }
 else {
     app.use(normalize(CONTEXT_PATH_1), express.static(path.join(__dirname, 'client/build')));
+    //
+    app.get('*', function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, '../../client/build/')});
+    });
 }
 
 // CORS
