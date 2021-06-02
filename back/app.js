@@ -53,7 +53,7 @@ app.use(session({
 }));
 
 // If we are not on DEV (we are on PRUEBAS or PROD), we activate the CAS service
-if (!DEV_ENVIRONMENT) {
+if (false) {
     // We desactivate the CAS for the moment
     /* app.use(cas.bounce, function (req, res, next) {
         next();
@@ -71,8 +71,9 @@ if (DEV_ENVIRONMENT) {
 else {
     app.use(normalize(CONTEXT_PATH_1), express.static(path.join(__dirname, 'client/build')));
     //
-    app.get('/pas/gestor-documental/edicion-contenidos', function(req, res) {
+    app.get('/pas/gestor-documental/edicion-contenidos', cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+        next();
     });
     app.get('/pas/gestor-documental/vista-previa', function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
