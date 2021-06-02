@@ -32,9 +32,6 @@ const documents_routes = require('./routes/document');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Environment variables
-const dev_environment = process.env.DEV;
-
 // Use React app
 const path = require('path');
 if (dev_environment) {
