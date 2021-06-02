@@ -18,7 +18,9 @@ functions.logWithFormat('service ' + service);
 let cas_url = process.env.CAS;
 functions.logWithFormat('cas_url ' + cas_url);
 const dev_environment = process.env.DEV;
+
 functions.logWithFormat('dev_environment ' + dev_environment);
+functions.logWithFormat('dev_environment type ' + typeof dev_environment);
 
 let cas = new CASAuthentication({
     cas_url: cas_url,
