@@ -10,6 +10,13 @@
   .buttonsMenu {
     display: flex;
     flex-direction: row;
+    width: 100%;
+  }
+
+  .buttonsMenuReversed {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
   }
 
   .editionView {

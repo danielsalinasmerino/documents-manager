@@ -8,9 +8,9 @@ import './PreviewButtonsMenuComponent.scss';
 function PreviewButtonsMenuComponent() {
 
     return (
-        <div className="buttonsMenu">
+        <div className="buttonsMenuReversed">
             <Link className="link-clean" to="/pas/gestor-documental/edicion-contenidos">
-                <StyledButtonComponent buttonText={'Volver a Vista de Edición'} />
+                <StyledButtonComponent buttonText={'Activar Vista de Edición'} />
             </Link>
         </div>
     );
