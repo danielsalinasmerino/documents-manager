@@ -58,6 +58,9 @@ if (!DEV_ENVIRONMENT) {
     /* app.use(cas.bounce, function (req, res, next) {
         next();
     }); */
+    app.get( '/pas/gestor-documental/edicion-contenidos', cas.bounce, function ( req, res ) {
+        next();
+    });
 }
 
 // We configure the routes for the React app
