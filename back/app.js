@@ -62,14 +62,12 @@ else {
     // If we are not on DEV (we are on PRUEBAS or PROD), we activate the CAS service
     app.get('/pas/gestor-documental/edicion-contenidos', cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
-        next();
     });
     app.get('/pas/gestor-documental/vista-previa', function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
     app.get('/pas/gestor-documental/gestion-editores', cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
-        next();
     });
 }
 
