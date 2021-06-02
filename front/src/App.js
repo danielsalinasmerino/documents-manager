@@ -56,7 +56,7 @@ function App() {
           <EditorsManagementComponent portalName={portalName}/>
         </Route>
       </Switch>
-      {/* <Redirect to="/pas/gestor-documental/edicion-contenidos"/> */}
+      <Redirect to="/pas/gestor-documental/edicion-contenidos"/>
     </Router>
   );
 }
