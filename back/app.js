@@ -58,7 +58,7 @@ if (!DEV_ENVIRONMENT) {
     /* app.use(cas.bounce, function (req, res, next) {
         next();
     }); */
-    app.get( '/pas/gestor-documental/edicion-contenidos', cas.bounce, function ( req, res ) {
+    app.get('/pas/gestor-documental/edicion-contenidos', cas.bounce, function ( req, res ) {
         next();
     });
 }
@@ -71,7 +71,13 @@ if (DEV_ENVIRONMENT) {
 else {
     app.use(normalize(CONTEXT_PATH_1), express.static(path.join(__dirname, 'client/build')));
     //
-    app.get('*', function(req, res) {
+    app.get('/pas/gestor-documental/edicion-contenidos', function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+    app.get('/pas/gestor-documental/vista-previa', function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+    app.get('/pas/gestor-documental/gestion-editores', function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
 }
