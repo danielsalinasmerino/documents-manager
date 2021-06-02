@@ -7,6 +7,9 @@ const normalize = require('normalize-path');
 require('dotenv').config();
 let CASAuthentication = require('cas-authentication');
 
+// Other imports
+const functions = require('./helpers/functions/functions');
+
 // Environment variables
 const contextPath1 = normalize(process.env.CONTEXT1);
 functions.logWithFormat('contextPath1 ' + contextPath1);
@@ -16,9 +19,6 @@ let cas_url = process.env.CAS;
 functions.logWithFormat('cas_url ' + cas_url);
 const dev_environment = process.env.DEV;
 functions.logWithFormat('dev_environment ' + dev_environment);
-
-// Other imports
-const functions = require('./helpers/functions/functions');
 
 let cas = new CASAuthentication({
     cas_url: cas_url,
