@@ -12,15 +12,13 @@ const functions = require('./helpers/functions/functions');
 
 // Environment variables
 const contextPath1 = normalize(process.env.CONTEXT1);
-functions.logWithFormat('contextPath1 ' + contextPath1);
+//functions.logWithFormat('contextPath1 ' + contextPath1);
 let service = process.env.SERVICE;
-functions.logWithFormat('service ' + service);
+//functions.logWithFormat('service ' + service);
 let cas_url = process.env.CAS;
-functions.logWithFormat('cas_url ' + cas_url);
-const dev_environment = process.env.DEV;
-
-functions.logWithFormat('dev_environment ' + dev_environment);
-functions.logWithFormat('dev_environment type ' + typeof dev_environment);
+//functions.logWithFormat('cas_url ' + cas_url);
+const dev_environment_string = process.env.DEV;
+//functions.logWithFormat('dev_environment ' + dev_environment);
 
 let cas = new CASAuthentication({
     cas_url: cas_url,
@@ -49,7 +47,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-if (!dev_environment) {
+if (dev_environment_string === 'false') {
     functions.logWithFormat('Inside Bouncer');
     functions.logWithFormat('Cas URL: ' + cas.cas_url);
     functions.logWithFormat('Service URL: ' + cas.service_url);
@@ -61,7 +59,7 @@ if (!dev_environment) {
 
 // Use React app
 const path = require('path');
-if (dev_environment) {
+if (dev_environment_string === 'true') {
     app.use(normalize(contextPath1), express.static(path.resolve(__dirname, './client/build')));
 }
 else {
