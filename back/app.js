@@ -32,6 +32,14 @@ const documents_routes = require('./routes/document');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+if (!dev_environment) {
+    app.use(cas.bounce, function (req, res, next) {
+        res.locals.portalName = 'pruebas';
+        res.locals.pruebasBoolean = true;
+        next();
+    });
+}
+
 // Use React app
 const path = require('path');
 if (dev_environment) {
@@ -39,10 +47,6 @@ if (dev_environment) {
 }
 else {
     app.use(normalize(contextPath1), express.static(path.join(__dirname, 'client/build')));
-    app.use(cas.bounce, function (req, res, next) {
-        res.locals.portalName = 'pruebas';
-        res.locals.pruebasBoolean = true;
-    });
 }
 
 // CORS
