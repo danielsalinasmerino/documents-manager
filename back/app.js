@@ -2,6 +2,7 @@
 
 // Required modules
 var express = require("express");
+var session = require('express-session');
 const normalize = require('normalize-path');
 require('dotenv').config();
 let CASAuthentication = require('cas-authentication');
@@ -23,7 +24,6 @@ let cas = new CASAuthentication({
 
 // We create our App
 var app = express();
-var session = require('express-session');
 
 // Routing Files
 const sections_routes = require('./routes/section');
@@ -43,8 +43,6 @@ app.use(session({
 
 if (!dev_environment) {
     app.use(cas.bounce, function (req, res, next) {
-        res.locals.portalName = 'pruebas';
-        res.locals.pruebasBoolean = true;
         next();
     });
 }
