@@ -23,6 +23,7 @@ let cas = new CASAuthentication({
 
 // We create our App
 var app = express();
+var session = require('express-session');
 
 // Routing Files
 const sections_routes = require('./routes/section');
@@ -31,6 +32,14 @@ const documents_routes = require('./routes/document');
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Set up an Express session, which is required for CASAuthentication.
+app.use(session({
+    secret: 'Secret',
+    resave: false,
+    saveUninitialized: true
+}));
+
 
 if (!dev_environment) {
     app.use(cas.bounce, function (req, res, next) {
