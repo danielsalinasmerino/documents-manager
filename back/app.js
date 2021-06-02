@@ -4,6 +4,22 @@
 var express = require("express");
 const normalize = require('normalize-path');
 require('dotenv').config();
+let CASAuthentication = require('cas-authentication');
+
+// Environment variables
+const contextPath1 = normalize(process.env.CONTEXT1);
+let service = process.env.SERVICE;
+let cas_url = process.env.CAS;
+const dev_environment = process.env.DEV;
+
+let cas = new CASAuthentication({
+    cas_url: cas_url,
+    //local o despliegue
+    service_url: service,
+    cas_version: '3.0',
+    session_info: 'user',
+    destroy_session: true//me borra la sesión al hacer el logout
+});
 
 // We create our App
 var app = express();
@@ -13,7 +29,7 @@ const sections_routes = require('./routes/section');
 const documents_routes = require('./routes/document');
 
 // Middlewares
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Environment variables
@@ -21,11 +37,15 @@ const dev_environment = process.env.DEV;
 
 // Use React app
 const path = require('path');
-if(dev_environment){
-    app.use(normalize('/pas/gestor-documental'), express.static(path.resolve(__dirname, './client/build')));
+if (dev_environment) {
+    app.use(normalize(contextPath1), express.static(path.resolve(__dirname, './client/build')));
 }
 else {
-    app.use(normalize('/pas/gestor-documental'), express.static(path.join(__dirname, 'client/build')));
+    app.use(normalize(contextPath1), express.static(path.join(__dirname, 'client/build')));
+    app.use(cas.bounce, function (req, res, next) {
+        res.locals.portalName = 'pruebas';
+        res.locals.pruebasBoolean = true;
+    });
 }
 
 // CORS
@@ -38,7 +58,7 @@ app.use((req, res, next) => {
 });
 
 // Routing
-const routingStart = normalize('/pas/gestor-documental') + '/api';
+const routingStart = normalize(contextPath1) + '/api';
 app.use(routingStart, sections_routes);
 app.use(routingStart, documents_routes);
 
