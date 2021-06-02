@@ -52,25 +52,14 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// If we are not on DEV (we are on PRUEBAS or PROD), we activate the CAS service
-if (false) {
-    // We desactivate the CAS for the moment
-    /* app.use(cas.bounce, function (req, res, next) {
-        next();
-    }); */
-    app.get('/pas/gestor-documental/edicion-contenidos', cas.bounce, function ( req, res ) {
-        next();
-    });
-}
-
-// We configure the routes for the React app
+// We configure the routes and also CAS
 const path = require('path');
 if (DEV_ENVIRONMENT) {
     app.use(normalize(CONTEXT_PATH_1), express.static(path.resolve(__dirname, './client/build')));
 }
 else {
     app.use(normalize(CONTEXT_PATH_1), express.static(path.join(__dirname, 'client/build')));
-    //
+    // If we are not on DEV (we are on PRUEBAS or PROD), we activate the CAS service
     app.get('/pas/gestor-documental/edicion-contenidos', cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
         next();
@@ -78,8 +67,9 @@ else {
     app.get('/pas/gestor-documental/vista-previa', function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
-    app.get('/pas/gestor-documental/gestion-editores', function(req, res) {
+    app.get('/pas/gestor-documental/gestion-editores', cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+        next();
     });
 }
 
