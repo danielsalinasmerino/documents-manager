@@ -177,7 +177,10 @@ export function getRoutingInfo() {
     // We create the final route
     const routeFinal = "/" + portalName + "/gestor-documental/" + currentRoute;
     // We edit the information regarding the portal to improve the UX
-    const portalNameFront = portalName.toUpperCase();
+    var portalNameFront = portalName.toUpperCase();
+    if(portalNameFront === 'ESTUDIANTES'){
+        portalNameFront = 'Estudiantes';
+    }
 
     return {
         portalName: portalName,
