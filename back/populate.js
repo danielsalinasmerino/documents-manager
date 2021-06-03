@@ -3,14 +3,14 @@
 // Required modules
 var mongoose = require('mongoose');
 var app = require('./app');
+require('dotenv').config();
 
 // Other imports
 const functions = require('./helpers/functions/functions');
-const variables = require('./environment');
 
 // Environment variables
-const port = variables.variables.port;
-const connectionDB = variables.variables.connection;
+const port = process.env.PORT;
+const connectionDB = process.env.CONNECTION_DB;
 
 // Required models
 var Section = require('./models/section');
