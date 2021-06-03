@@ -171,7 +171,7 @@ function EditionComponent({ portalName, sections, documents, setSectionsCallback
     return (
         <div className="main-wrapper">
             <HeaderComponent portalName={portalName}/>
-            <h1>Bienvenido/a a la vista de edición de Documentación del {portalName}</h1>
+            <h1>Bienvenido/a a la vista de edición de Documentación {(portalName === 'PAS' || portalName === 'PDI') ? ("del " + portalName) : ("de " + portalName)}</h1>
             <EditionButtonsMenuComponent openModalCallback={openModal}/>
             <SectionsComponent sections={sections} documents={documents} editableSections={true} editSectionCallback={openModal} deleteSectionCallback={openDeleteSectionModal}/>
             {/* Modal to create or edit a section */}
