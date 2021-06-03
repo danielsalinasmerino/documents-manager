@@ -4,6 +4,7 @@ import React from 'react';
 import StyledButtonComponent from '../styled-button-component/StyledButtonComponent';
 
 import { getRoutingInfo } from '../../helpers/functions/functions';
+import { variables } from '../../environment';
 
 import './PreviewButtonsMenuComponent.scss';
 
@@ -14,9 +15,9 @@ function PreviewButtonsMenuComponent() {
 
     return (
         <div className="buttonsMenuReversed">
-            <Link className="link-clean" to={"/" + portalName + "/gestor-documental/edicion-contenidos"}>
+            <a className="link-clean" href={variables.service + "/" + portalName + "/gestor-documental/edicion-contenidos"}>
                 <StyledButtonComponent buttonText={'Activar Vista de Edición'} />
-            </Link>
+            </a>
         </div>
     );
 }
