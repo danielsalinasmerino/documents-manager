@@ -65,7 +65,7 @@ function App() {
           <EditionComponent portalName={portalNameFront} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments} />
         </Route>
         <Route path={"/" + portalName + "/gestor-documental/gestion-editores"}>
-          <EditorsManagementComponent portalName={portalNameFront} users={users}/>
+          <EditorsManagementComponent portalName={portalNameFront} users={users} setUsersCallback={setUsers}/>
         </Route>
       </Switch>
       <Redirect to={routeFinal} />

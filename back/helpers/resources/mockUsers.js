@@ -9,6 +9,18 @@ const mockUsers = [
         role: 'editor'  
     },
 
+    {
+        idUser: "9bNo9nIkKv8s3iKItC3JjKSadoSVIzCz",
+        email: "gabriel.huecas@upm.es",
+        role: 'editor'  
+    },
+
+    {
+        idUser: "9bKo9nIkKV4s3iKItC3JjKSadoSVIzCz",
+        email: "javier.conde.diaz@alumnos.upm.es",
+        role: 'editor'  
+    },
+
 ];
 
 module.exports =  mockUsers;
