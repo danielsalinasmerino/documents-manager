@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
 
     // GET all sections
-    fetch(readSectionsEndpoint, getRequestOptions)
+    fetch((readSectionsEndpoint + '/' + portalName), getRequestOptions)
       .then(response => response.text())
       .then(result => {
         setSections(sortArrayOfSectionsByPosition(JSON.parse(result)));

@@ -7,12 +7,15 @@ import SectionModalHeader from '../section-modal-header/SectionModalHeader';
 import SectionTextInput from '../section-text-input/SectionTextInput';
 
 import { Document } from '../../models/document';
-import { makeId } from '../../helpers/functions/functions'; 
+import { getRoutingInfo, makeId } from '../../helpers/functions/functions'; 
 import { Section } from '../../models/section';
 
 import './SectionModalComponent.scss';
 
 function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocumentCallback, closeModal, editSectionMode, sectionToEdit, documentsToEdit, editSectionCallBack, editDocumentCallback}) {
+
+    const routingInfo = getRoutingInfo();
+    const portalName = routingInfo.portalName;
 
     const [titleSection, setTitleSection] = useState("");
     const [errorTitle, setErrorTitle] = useState(false);
@@ -84,7 +87,7 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
                 new Date(),
                 position,
                 null, // To do (parentID)
-                null  // To do (portalID)
+                portalName
             );
             const allDocuments = documentsArray.concat(documentsOnlyURLArray);
             for(let i = 0; i < allDocuments.length; i++){
