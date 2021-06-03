@@ -3,13 +3,18 @@ import React from 'react';
 
 import StyledButtonComponent from '../styled-button-component/StyledButtonComponent';
 
+import { getRoutingInfo } from '../../helpers/functions/functions';
+
 import './EditorsManagementButtonsMenuComponent.scss';
 
 function EditorsManagementButtonsMenuComponent(){
 
+    const routingInfo = getRoutingInfo();
+    const portalName = routingInfo.portalName;
+
     return (
         <div className="buttonsMenu editionView">
-            <Link className="link-clean" to="/pas/gestor-documental/edicion-contenidos">
+            <Link className="link-clean" to={"/" + portalName + "/gestor-documental/edicion-contenidos"}>
                 <StyledButtonComponent buttonText={'Vista de Edición'}/>
             </Link>
         </div>

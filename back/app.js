@@ -16,6 +16,10 @@ functions.logWithFormat('Start point for app.js!');
 // Environment variables
 const CONTEXT_PATH_1 = normalize(process.env.CONTEXT1);
 //functions.logWithFormat('CONTEXT_PATH_1 ' + CONTEXT_PATH_1);
+const CONTEXT_PATH_2 = normalize(process.env.CONTEXT2);
+//functions.logWithFormat('CONTEXT_PATH_2 ' + CONTEXT_PATH_2);
+const CONTEXT_PATH_3 = normalize(process.env.CONTEXT3);
+//functions.logWithFormat('CONTEXT_PATH_3 ' + CONTEXT_PATH_3);
 const SERVICE = process.env.SERVICE;
 //functions.logWithFormat('SERVICE ' + SERVICE);
 const CAS_URL = process.env.CAS;
@@ -56,17 +60,39 @@ app.use(session({
 const path = require('path');
 if (DEV_ENVIRONMENT) {
     app.use(normalize(CONTEXT_PATH_1), express.static(path.resolve(__dirname, './client/build')));
+    app.use(normalize(CONTEXT_PATH_2), express.static(path.resolve(__dirname, './client/build')));
+    app.use(normalize(CONTEXT_PATH_3), express.static(path.resolve(__dirname, './client/build')));
 }
 else {
     app.use(normalize(CONTEXT_PATH_1), express.static(path.join(__dirname, 'client/build')));
+    app.use(normalize(CONTEXT_PATH_2), express.static(path.join(__dirname, 'client/build')));
+    app.use(normalize(CONTEXT_PATH_3), express.static(path.join(__dirname, 'client/build')));
     // If we are not on DEV (we are on PRUEBAS or PROD), we activate the CAS service
-    app.get('/pas/gestor-documental/edicion-contenidos', cas.bounce, function(req, res) {
+    app.get((CONTEXT_PATH_1 + '/edicion-contenidos'), cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
-    app.get('/pas/gestor-documental/vista-previa', function(req, res) {
+    app.get((CONTEXT_PATH_2 + '/edicion-contenidos'), cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
-    app.get('/pas/gestor-documental/gestion-editores', cas.bounce, function(req, res) {
+    app.get((CONTEXT_PATH_3 + '/edicion-contenidos'), cas.bounce, function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+    app.get((CONTEXT_PATH_1 + '/vista-previa'), function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+    app.get((CONTEXT_PATH_2 + '/vista-previa'), function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+    app.get((CONTEXT_PATH_3 + '/vista-previa'), function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+    app.get((CONTEXT_PATH_1 + '/gestion-editores'), cas.bounce, function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+    app.get((CONTEXT_PATH_2 + '/gestion-editores'), cas.bounce, function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+    app.get((CONTEXT_PATH_3 + '/gestion-editores'), cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
 }
@@ -80,7 +106,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Routing
+// Routing: We could use any route, we choose CONTEXT_PATH_1 just because we want
 const routingStart = normalize(CONTEXT_PATH_1) + '/api';
 app.use(routingStart, sections_routes);
 app.use(routingStart, documents_routes);

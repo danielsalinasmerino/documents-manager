@@ -10,7 +10,7 @@ import EditionComponent from './components/edition-component/EditionComponent';
 import EditorsManagementComponent from './components/editors-management-component/EditorsManagementComponent';
 import PreviewComponent from './components/preview-component/PreviewComponent';
 
-import { sortArrayOfSectionsByPosition } from './helpers/functions/functions';
+import { getRoutingInfo, sortArrayOfSectionsByPosition } from './helpers/functions/functions';
 import { readSectionsEndpoint, readDocumentsEndpoint } from './services/endpoints';
 import { getRequestOptions } from './services/requestOptions';
 
@@ -18,7 +18,11 @@ import './App.scss';
 
 function App() {
 
-  const portalName = 'PAS';
+  const routingInfo = getRoutingInfo();
+
+  const portalName = routingInfo.portalName;
+  const routeFinal = routingInfo.routeFinal;
+  const portalNameFront = routingInfo.portalNameFront;
 
   const [sections, setSections] = useState([]);
   const [documents, setDocuments] = useState([]);
@@ -45,17 +49,17 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/pas/gestor-documental/vista-previa">
-          <PreviewComponent portalName={portalName} sections={sections} documents={documents}/>
+        <Route path={"/" + portalName + "/gestor-documental/vista-previa"}>
+          <PreviewComponent portalName={portalNameFront} sections={sections} documents={documents} />
         </Route>
-        <Route path="/pas/gestor-documental/edicion-contenidos">
-          <EditionComponent portalName={portalName} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments}/>
+        <Route path={"/" + portalName + "/gestor-documental/edicion-contenidos"}>
+          <EditionComponent portalName={portalNameFront} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments} />
         </Route>
-        <Route path="/pas/gestor-documental/gestion-editores">
-          <EditorsManagementComponent portalName={portalName}/>
+        <Route path={"/" + portalName + "/gestor-documental/gestion-editores"}>
+          <EditorsManagementComponent portalName={portalNameFront} />
         </Route>
       </Switch>
-      <Redirect to="/pas/gestor-documental/vista-previa"/>
+      <Redirect to={routeFinal} />
     </Router>
   );
 }
