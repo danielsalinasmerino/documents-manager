@@ -14,6 +14,7 @@ function EditorsManagementButtonsMenuComponent(){
 
     return (
         <div className="buttonsMenu editionView">
+            <StyledButtonComponent buttonText={'Añadir Editor'}/>
             <Link className="link-clean" to={"/" + portalName + "/gestor-documental/edicion-contenidos"}>
                 <StyledButtonComponent buttonText={'Vista de Edición'}/>
             </Link>

@@ -8,13 +8,26 @@
         height: 50px;
         text-align: left;
         background-color: #4664A2;
+        width: "100%";
         
 
-        .title-element {
+        .title-element-big {
             padding: 5px;
             padding-left: 10px;
             padding-right: 10px;
             color: white;
+
+            width: "70%";
+        }
+
+        .title-element-small {
+            padding: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: white;
+            background-color: "red";
+
+            width: "4%";
         }
     }
 
@@ -22,11 +35,22 @@
         height: 40px;
         border: 1px solid #4664A2;
         text-align: left;
+        width: "100%";
 
-        .content-element {
+        .content-element-big {
             padding: 5px;
             padding-left: 10px;
             padding-right: 10px;
+
+            width: "70%";
+        }
+
+        .content-element-small {
+            padding: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+
+            width: "5%";
         }
     }
 }
