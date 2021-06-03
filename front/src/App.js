@@ -10,7 +10,6 @@ import EditionComponent from './components/edition-component/EditionComponent';
 import EditorsManagementComponent from './components/editors-management-component/EditorsManagementComponent';
 import PreviewComponent from './components/preview-component/PreviewComponent';
 
-
 import { sortArrayOfSectionsByPosition } from './helpers/functions/functions';
 import { readSectionsEndpoint, readDocumentsEndpoint } from './services/endpoints';
 import { getRequestOptions } from './services/requestOptions';
