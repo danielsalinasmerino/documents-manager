@@ -11,7 +11,7 @@ import EditorsManagementComponent from './components/editors-management-componen
 import PreviewComponent from './components/preview-component/PreviewComponent';
 
 import { getRoutingInfo, sortArrayOfSectionsByPosition } from './helpers/functions/functions';
-import { readSectionsEndpoint, readDocumentsEndpoint } from './services/endpoints';
+import { readSectionsEndpoint, readDocumentsEndpoint, readUsersEndpoint } from './services/endpoints';
 import { getRequestOptions } from './services/requestOptions';
 
 import './App.scss';
@@ -26,10 +26,11 @@ function App() {
 
   const [sections, setSections] = useState([]);
   const [documents, setDocuments] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
 
-    // GET all sections
+    // GET sections based on the context
     fetch((readSectionsEndpoint + '/' + portalName), getRequestOptions)
       .then(response => response.text())
       .then(result => {
@@ -44,6 +45,14 @@ function App() {
         setDocuments(JSON.parse(result));
       })
       .catch(error => console.log('error', error));
+
+    // GET all users
+    fetch(readUsersEndpoint, getRequestOptions)
+      .then(response => response.text())
+      .then(result => {
+        setUsers(JSON.parse(result));
+      })
+      .catch(error => console.log('error', error));
   }, [portalName]);
 
   return (
@@ -56,7 +65,7 @@ function App() {
           <EditionComponent portalName={portalNameFront} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments} />
         </Route>
         <Route path={"/" + portalName + "/gestor-documental/gestion-editores"}>
-          <EditorsManagementComponent portalName={portalNameFront} />
+          <EditorsManagementComponent portalName={portalNameFront} users={users}/>
         </Route>
       </Switch>
       <Redirect to={routeFinal} />

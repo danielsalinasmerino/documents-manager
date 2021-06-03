@@ -5,7 +5,9 @@ import HeaderComponent from '../header-component/HeaderComponent';
 
 import './EditorsManagementComponent.scss';
 
-function EditorsManagementComponent({ portalName }) {
+function EditorsManagementComponent({ portalName, users }) {
+
+    console.log(users)
 
     return (
         <div className="main-wrapper">

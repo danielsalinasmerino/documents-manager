@@ -16,3 +16,9 @@ export const createDocumentEndpoint = endpointStart + "documents";
 export const readDocumentsEndpoint = endpointStart + "documents";
 export const updateDocumentByIdEndpoint = endpointStart + "documents";
 export const deleteDocumentByIdEndpoint = endpointStart + "documents/delete";
+
+// Users related endpoints
+export const createUserEndpoint = endpointStart + "users";
+export const readUsersEndpoint = endpointStart + "users";
+export const updateUserByIdEndpoint = endpointStart + "users";
+export const deleteUserByIdEndpoint = endpointStart + "users/delete";
