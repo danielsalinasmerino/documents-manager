@@ -43,7 +43,7 @@ var controller = {
             if(err) return res.status(500).send({message: "Error on Read Sections PAS."});
             if(!sections) return res.status(404).send({message: "It was not possible to Read the Sections PAS."});
 
-            sectionsPas = sections.filter(section.portalID === 'pas');
+            sectionsPas = sections.filter(section => section.portalID === 'pas');
 
             return res.status(200).send(sectionsPas);
         });
@@ -54,7 +54,7 @@ var controller = {
             if(err) return res.status(500).send({message: "Error on Read Sections PDI."});
             if(!sections) return res.status(404).send({message: "It was not possible to Read the Sections PDI."});
 
-            sectionsPdi = sections.filter(section.portalID === 'pdi');
+            sectionsPdi = sections.filter(section => section.portalID === 'pdi');
 
             return res.status(200).send(sectionsPdi);
         });
@@ -65,7 +65,7 @@ var controller = {
             if(err) return res.status(500).send({message: "Error on Read Sections Estudiantes."});
             if(!sections) return res.status(404).send({message: "It was not possible to Read the Sections Estudiantes."});
 
-            sectionsEstudiantes = sections.filter(section.portalID === 'estudiantes');
+            sectionsEstudiantes = sections.filter(section => section.portalID === 'estudiantes');
 
             return res.status(200).send(sectionsEstudiantes);
         });
