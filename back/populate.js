@@ -15,10 +15,12 @@ const connectionDB = process.env.CONNECTION_DB;
 // Required models
 var Section = require('./models/section');
 var Document = require('./models/document');
+var User = require('./models/user');
 
 // MOCK data
 const mockSections = require('./helpers/resources/mockSections');
 const mockDocuments = require('./helpers/resources/mockDocuments');
+const mockUsers = require('./helpers/resources/mockUsers');
 
 function createNewSectionWithMockData(data){
     var section = new Section();
@@ -46,6 +48,14 @@ function createNewDocumentWithMockData(data){
     return document;
 }
 
+function createNewUserWithMockData(data){
+    var user = new User();
+    user.idUser = data.idUser;
+    user.email = data.email;
+    user.role = data.role;
+    return user;
+}
+
 mongoose.Promise = global.Promise;
 mongoose.connect(connectionDB)
         .then(() => {
@@ -67,12 +77,18 @@ mongoose.connect(connectionDB)
                             var document = createNewDocumentWithMockData(mockDocuments[i]);
                             document.save((err, documentStored) => { 
                                 functions.logWithFormat("Created Document with title: " + mockDocuments[i].title);
-                                // We end the script when we have already populated the DB
-                                if(i === (mockDocuments.length -1)){
-                                    functions.logWithFormat("POPULATE FINISHED");
-                                }
                             });
                         }
+                        // Users populate
+                        User.deleteMany({}).then(() => {
+                            functions.logWithFormat("Deleted all Users");
+                            for(let i = 0; i < mockUsers.length; i++){
+                                var user = createNewUserWithMockData(mockUsers[i]);
+                                user.save((err, userStored) => { 
+                                    functions.logWithFormat("Created User with email: " + mockUsers[i].email);
+                                });
+                            }
+                        });
                     });
                 });
             });
