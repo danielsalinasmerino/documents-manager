@@ -16,7 +16,7 @@ function HeaderComponent({ portalName }) {
                 <a href={etsitLink}><img className="logo" src={logoEtsit} alt="ETSIT Logo"/></a>
             </div> 
             <div className="infoWrapper">
-                <p className="title">Documentación del {portalName} (Impresos)</p>
+                <p className="title">Documentación {(portalName === 'PAS' || portalName === 'PDI') ? ("del " + portalName) : ("de " + portalName)} (Impresos)</p>
                 <p className="sub"><a href={etsitLink}>Escuela Técnica Superior de Ingenieros de Telecomunicaciones</a> de la <a href={upmLink}>Universidad Politécnica de Madrid</a></p>
             </div>
             <div className="optionsWrapper">
