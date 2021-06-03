@@ -44,6 +44,7 @@ var app = express();
 // Routing Files
 const sections_routes = require('./routes/section');
 const documents_routes = require('./routes/document');
+const users_routes = require('./routes/user');
 
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
@@ -110,6 +111,7 @@ app.use((req, res, next) => {
 const routingStart = normalize(CONTEXT_PATH_1) + '/api';
 app.use(routingStart, sections_routes);
 app.use(routingStart, documents_routes);
+app.use(routingStart, users_routes);
 
 // Export
 module.exports = app;
