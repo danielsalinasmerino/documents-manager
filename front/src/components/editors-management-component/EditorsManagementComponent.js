@@ -48,17 +48,17 @@ function EditorsManagementComponent({ portalName, users }) {
                 editDocumentCallback={editDocument}
                 sectiongsLength={sections.length}/>
             </Modal> */}
-            {/* Modal to delete a section */}
+            {/* Modal to delete a user */}
             {/* <Modal
-              isOpen={modalDeleteSectonIsOpen}
-              onRequestClose={closeDeleteSectionModal}
-              style={modalDeleteSectionCustomStyles}
-              ariaHideApp={false}
-              contentLabel="Delete Section Modal">
-              <DeleteSecionModalComponent
-                closeDeleteSectionModal={closeDeleteSectionModal}
-                confirmDeleteSection={confirmDeleteSection}/>
-            </Modal> */}
+                isOpen={modalDeleteUserIsOpen}
+                onRequestClose={closeDeleteUserModal}
+                style={modalDeleteSectionCustomStyles}
+                ariaHideApp={false}
+                contentLabel="Delete User Modal">
+                <DeleteSecionModalComponent
+                    closeDeleteUserModal={closeDeleteUserModal}
+                    confirmDeleteUser={confirmDeleteUser} />
+            </Modal> */}
         </div>
     );
 }
