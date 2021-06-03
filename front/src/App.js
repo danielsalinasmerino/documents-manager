@@ -44,7 +44,7 @@ function App() {
         setDocuments(JSON.parse(result));
       })
       .catch(error => console.log('error', error));
-  }, []);
+  }, [portalName]);
 
   return (
     <Router>

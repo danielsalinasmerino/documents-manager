@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React from 'react';
 
 import StyledButtonComponent from '../styled-button-component/StyledButtonComponent';
