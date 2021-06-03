@@ -85,6 +85,12 @@ var controller = {
         });
     },
 
+    deleteDocuments: function(req, res){
+        Document.deleteMany({}).then(() => {
+            return res.status(200).send({ message: "All documents deleted" });
+        });
+    },
+
     /*  uploadImage: function(req, res){
         var projectId = req.params.id;
         var fileName = 'Imagen no subida...';

@@ -116,6 +116,12 @@ var controller = {
         });
     },
 
+    deleteSections: function(req, res){
+        Section.deleteMany({}).then(() => {
+            return res.status(200).send({ message: "All sections deleted" });
+        });
+    },
+
 };
 
 module.exports = controller;

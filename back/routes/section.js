@@ -17,6 +17,6 @@ router.get((urlStart + '/pdi'), SectionController.readSectionsPdi);
 router.get((urlStart + '/estudiantes'), SectionController.readSectionsEstudiantes);
 router.get((urlStart + '/:idSection'), SectionController.readSectionById);
 router.put((urlStart + '/:idSection'), SectionController.updateSectionById);
-router.delete((urlStart + '/:idSection'), SectionController.deleteSectionById); 
+router.delete((urlStart + '/deleteAll'), SectionController.deleteSections); 
 
 module.exports = router;
