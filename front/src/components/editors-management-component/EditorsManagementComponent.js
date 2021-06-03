@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import EditorsManagementButtonsMenuComponent from '../editors-management-buttons-menu-component/EditorsManagementButtonsMenuComponent';
 import HeaderComponent from '../header-component/HeaderComponent';
+import UserOptionsComponent from '../user-options-component/UserOptionsComponent';
 
 import './EditorsManagementComponent.scss';
 
@@ -15,13 +16,14 @@ function EditorsManagementComponent({ portalName, users }) {
             <table className="editors-table">
                 <tr className="title-row">
                     <th className="title-element-big">Correo</th>
-                    <th className="title-element-small" colSpan="2">Opciones</th>
+                    <th className="title-element-small">Opciones</th>
                 </tr>
                 {users.map(user =>
                     <tr className="content-row">
                         <td className="content-element-big">{user.email}</td>
-                        <td className="content-element-small">Editar</td>
-                        <td className="content-element-small">Eliminar</td>
+                        <td className="content-element-small">
+                            <UserOptionsComponent clickEditButtonCallback={() => console.log('Edit')} clickDeleteButtonCallback={() => console.log('Delete')} />
+                        </td>
                     </tr>
                 )}
             </table>
