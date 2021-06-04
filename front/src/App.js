@@ -38,11 +38,17 @@ function App() {
         .then(response => response.json())
         .then(result => {
           setCasUserLogged(result);
+          // We check if the user COULD edit the platform
+          for (let i = 0; i < users.length; i++) {
+            if (users[i].email === result.mail) {
+              setPossibleEditor(true);
+            }
+          }
         })
         .catch(error => console.log('error', error));
     }
     catch {
-      setCasUserLogged({mail: "random@mail.com"})
+      setCasUserLogged({ mail: "random@mail.com" })
     }
 
     // GET sections based on the context
@@ -69,13 +75,6 @@ function App() {
       })
       .catch(error => console.log('error', error));
 
-    // We check if the user COULD edit the platform
-    for(let i = 0; i < users.length; i++){
-      if(users[i].email === casUserLogged.mail){
-        setPossibleEditor(true);
-      }
-    }
-    
   }, [portalName]);
 
   return (
@@ -85,10 +84,10 @@ function App() {
           <PreviewComponent portalName={portalNameFront} sections={sections} documents={documents} />
         </Route>
         <Route path={"/" + portalName + "/gestor-documental/edicion-contenidos"}>
-          <EditionComponent portalName={portalNameFront} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments} possibleEditor={possibleEditor}/>
+          <EditionComponent portalName={portalNameFront} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments} possibleEditor={possibleEditor} />
         </Route>
         <Route path={"/" + portalName + "/gestor-documental/gestion-editores"}>
-          <EditorsManagementComponent portalName={portalNameFront} users={users} setUsersCallback={setUsers} possibleEditor={possibleEditor}/>
+          <EditorsManagementComponent portalName={portalNameFront} users={users} setUsersCallback={setUsers} possibleEditor={possibleEditor} />
         </Route>
       </Switch>
       <Redirect to={routeFinal} />
