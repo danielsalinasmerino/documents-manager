@@ -29,6 +29,18 @@ const DEV_ENVIRONMENT = (process.env.DEV === 'true');
 const SESSION_SECRET = process.env.SESSION_SECRET;
 //functions.logWithFormat('SESSION_SECRET ' + SESSION_SECRET);
 
+// We create our App
+var app = express();
+
+// CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
+
 // CAS configuration
 let cas = new CASAuthentication({
     cas_url: CAS_URL,
@@ -37,9 +49,6 @@ let cas = new CASAuthentication({
     session_info: 'user',
     destroy_session: true
 });
-
-// We create our App
-var app = express();
 
 // Routing Files
 const sections_routes = require('./routes/section');
@@ -56,6 +65,11 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+
+// TO DO
+app.get((CONTEXT_PATH_1 + '/api/user-logged'), function routeHandler(req, res) {
+    res.json({email: "Email"});
+});
 
 // We configure the routes and also CAS
 const path = require('path');
@@ -78,15 +92,6 @@ else {
     app.get((CONTEXT_PATH_3 + '/edicion-contenidos'), cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
-    app.get((CONTEXT_PATH_1 + '/vista-previa'), function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
-    });
-    app.get((CONTEXT_PATH_2 + '/vista-previa'), function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
-    });
-    app.get((CONTEXT_PATH_3 + '/vista-previa'), function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
-    });
     app.get((CONTEXT_PATH_1 + '/gestion-editores'), cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
@@ -96,16 +101,16 @@ else {
     app.get((CONTEXT_PATH_3 + '/gestion-editores'), cas.bounce, function(req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
+    app.get((CONTEXT_PATH_1 + '/vista-previa'), function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+    app.get((CONTEXT_PATH_2 + '/vista-previa'), function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
+    app.get((CONTEXT_PATH_3 + '/vista-previa'), function(req, res) {
+        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    });
 }
-
-// CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
 
 // Routing: We could use any route, we choose CONTEXT_PATH_1 just because we want
 const routingStart = normalize(CONTEXT_PATH_1) + '/api';

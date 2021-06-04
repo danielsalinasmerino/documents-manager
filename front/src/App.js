@@ -11,7 +11,7 @@ import EditorsManagementComponent from './components/editors-management-componen
 import PreviewComponent from './components/preview-component/PreviewComponent';
 
 import { getRoutingInfo, sortArrayOfSectionsByPosition } from './helpers/functions/functions';
-import { readSectionsEndpoint, readDocumentsEndpoint, readUsersEndpoint } from './services/endpoints';
+import { readUserLoggedInEndpoint, readSectionsEndpoint, readDocumentsEndpoint, readUsersEndpoint } from './services/endpoints';
 import { getRequestOptions } from './services/requestOptions';
 
 import './App.scss';
@@ -27,8 +27,18 @@ function App() {
   const [sections, setSections] = useState([]);
   const [documents, setDocuments] = useState([]);
   const [users, setUsers] = useState([]);
+  const [casUserLogged, setCasUserLogged] = useState({});
 
   useEffect(() => {
+
+    // GET CAS user logged
+    fetch((readUserLoggedInEndpoint), getRequestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        setCasUserLogged(result);
+      })
+      .catch(error => console.log('error', error));
 
     // GET sections based on the context
     fetch((readSectionsEndpoint + '/' + portalName), getRequestOptions)

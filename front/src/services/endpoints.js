@@ -2,6 +2,9 @@ import { variables } from '../environment';
 
 const endpointStart = variables.endpointStart;
 
+// User logged endpoint
+export const readUserLoggedInEndpoint = endpointStart + "user-logged";
+
 // Sections related endpoints
 export const createSectionEndpoint = endpointStart + "sections";
 export const readSectionsEndpoint = endpointStart + "sections";
