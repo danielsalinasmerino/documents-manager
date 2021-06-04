@@ -107,9 +107,9 @@ else {
     });
 }
 
-// TO DO
+// We create a route to let the Front know which CAS user we are
 app.get((CONTEXT_PATH_1 + '/api/user-logged'), function routeHandler(req, res) {
-    //res.json({email: "Email"});
+    //res.json({mail: "Email"});
     res.json(req.session.user);
 });
 
