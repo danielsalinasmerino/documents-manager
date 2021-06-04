@@ -83,7 +83,6 @@ function EditorsManagementComponent({ portalName, users, setUsersCallback }) {
     }
 
     const deleteUser = () => {
-        const index = users.map(element => element.idUser).indexOf(userToDelete.idUser);
         // DELETE a user
         fetch((deleteUserByIdEndpoint + '/' + userToDelete.idUser), deleteRequestOptions)
             .then(response => response.text())
@@ -91,8 +90,13 @@ function EditorsManagementComponent({ portalName, users, setUsersCallback }) {
                 //console.log(result)
             })
             .catch(error => console.log('error', error));
-        users.splice(index, 1);
-        setUsersCallback([...users.sort((a, b) => (a.email > b.email) ? 1 : -1)]);
+        var newUsers = [];
+        for(let i = 0; i < users.length; i++){
+            if(users[i].idUser !== userToDelete.idUser){
+                newUsers.push(users[i]);
+            }
+        }
+        setUsersCallback([...newUsers.sort((a, b) => (a.email > b.email) ? 1 : -1)]);
         closeDeleteUserModal();
     }
 
