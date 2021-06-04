@@ -40,7 +40,12 @@ function App() {
           setCasUserLogged(result);
           // We check if the user COULD edit the platform
           for (let i = 0; i < users.length; i++) {
+            console.log('')
+            console.log(users[i].email)
+            console.log(result.mail)
+            console.log('')
             if (users[i].email === result.mail) {
+              console.log('Possible')
               setPossibleEditor(true);
             }
           }
