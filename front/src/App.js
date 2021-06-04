@@ -28,17 +28,22 @@ function App() {
   const [documents, setDocuments] = useState([]);
   const [users, setUsers] = useState([]);
   const [casUserLogged, setCasUserLogged] = useState({});
+  const [possibleEditor, setPossibleEditor] = useState(false);
 
   useEffect(() => {
 
-    // GET CAS user logged
-    fetch((readUserLoggedInEndpoint), getRequestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log(result)
-        setCasUserLogged(result);
-      })
-      .catch(error => console.log('error', error));
+    try {
+      // GET CAS user logged
+      fetch((readUserLoggedInEndpoint), getRequestOptions)
+        .then(response => response.json())
+        .then(result => {
+          setCasUserLogged(result);
+        })
+        .catch(error => console.log('error', error));
+    }
+    catch {
+      setCasUserLogged({mail: "random@mail.com"})
+    }
 
     // GET sections based on the context
     fetch((readSectionsEndpoint + '/' + portalName), getRequestOptions)
@@ -63,6 +68,14 @@ function App() {
         setUsers(JSON.parse(result));
       })
       .catch(error => console.log('error', error));
+
+    // We check if the user COULD edit the platform
+    for(let i = 0; i < users.length; i++){
+      if(users[i].email === casUserLogged.mail){
+        setPossibleEditor(true);
+      }
+    }
+    
   }, [portalName]);
 
   return (
@@ -72,10 +85,10 @@ function App() {
           <PreviewComponent portalName={portalNameFront} sections={sections} documents={documents} />
         </Route>
         <Route path={"/" + portalName + "/gestor-documental/edicion-contenidos"}>
-          <EditionComponent portalName={portalNameFront} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments} />
+          <EditionComponent portalName={portalNameFront} sections={sections} documents={documents} setSectionsCallback={setSections} setDocumentsCallback={setDocuments} possibleEditor={possibleEditor}/>
         </Route>
         <Route path={"/" + portalName + "/gestor-documental/gestion-editores"}>
-          <EditorsManagementComponent portalName={portalNameFront} users={users} setUsersCallback={setUsers}/>
+          <EditorsManagementComponent portalName={portalNameFront} users={users} setUsersCallback={setUsers} possibleEditor={possibleEditor}/>
         </Route>
       </Switch>
       <Redirect to={routeFinal} />

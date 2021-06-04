@@ -6,6 +6,7 @@ import EditorsManagementButtonsMenuComponent from '../editors-management-buttons
 import HeaderComponent from '../header-component/HeaderComponent';
 import UserModalComponent from '../user-modal-component/UserModalComponent';
 import UserOptionsComponent from '../user-options-component/UserOptionsComponent';
+import UnauthorizedComponent from '../unauthorized-component/UnauthorizedComponent';
 
 import { createUserEndpoint, deleteUserByIdEndpoint, updateUserByIdEndpoint } from '../../services/endpoints';
 import { functionPostRequestOptions, functionPutRequestOptions, deleteRequestOptions } from '../../services/requestOptions';
@@ -14,7 +15,7 @@ import { modalDeleteSectionCustomStyles } from '../../helpers/constants/modalDel
 
 import './EditorsManagementComponent.scss';
 
-function EditorsManagementComponent({ portalName, users, setUsersCallback }) {
+function EditorsManagementComponent({ portalName, users, setUsersCallback, possibleEditor }) {
 
     const [modalIsOpen, setIsOpen] = useState(false);
     const [editUserMode, setEditUserMode] = useState(false);
@@ -91,8 +92,8 @@ function EditorsManagementComponent({ portalName, users, setUsersCallback }) {
             })
             .catch(error => console.log('error', error));
         var newUsers = [];
-        for(let i = 0; i < users.length; i++){
-            if(users[i].idUser !== userToDelete.idUser){
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].idUser !== userToDelete.idUser) {
                 newUsers.push(users[i]);
             }
         }
@@ -103,48 +104,57 @@ function EditorsManagementComponent({ portalName, users, setUsersCallback }) {
     return (
         <div className="main-wrapper">
             <HeaderComponent portalName={portalName} />
-            <h1>Bienvenido/a a la vista de gestión de editores</h1>
-            <EditorsManagementButtonsMenuComponent openModalCallback={openModal}/>
-            {/* Table */}
-            <table className="editors-table">
-                <tr className="title-row">
-                    <th className="title-element-big">Correo</th>
-                    <th className="title-element-small">Opciones</th>
-                </tr>
-                {users.map(user =>
-                    <tr className="content-row">
-                        <td className="content-element-big">{user.email}</td>
-                        <td className="content-element-small">
-                            <UserOptionsComponent usersNumber={users.length} clickEditButtonCallback={() => openModal(user)} clickDeleteButtonCallback={() => openDeleteUserModal(user)} />
-                        </td>
-                    </tr>
-                )}
-            </table>
-            {/* Modal to create or edit a user */}
-            <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={() => closeModal(true)}
-              style={modalUserCustomStyles}
-              ariaHideApp={false}
-              contentLabel="New/Edit User Modal">
-              <UserModalComponent
-                closeModal={() => closeModal(true)}
-                saveUserCallBack={saveUser}
-                editUserMode={editUserMode}
-                userToEdit={userToEdit}
-                editUserCallBack={editUser}/>
-            </Modal>
-            {/* Modal to delete a user */}
-            <Modal
-                isOpen={modalDeleteUserIsOpen}
-                onRequestClose={closeDeleteUserModal}
-                style={modalDeleteSectionCustomStyles}
-                ariaHideApp={false}
-                contentLabel="Delete User Modal">
-                <DeleteUserModalComponent
-                    closeDeleteUserModal={closeDeleteUserModal}
-                    confirmDeleteUser={confirmDeleteUser} />
-            </Modal>
+            {
+                possibleEditor && (<>
+                    <h1>Bienvenido/a a la vista de gestión de editores</h1>
+                    <EditorsManagementButtonsMenuComponent openModalCallback={openModal} />
+                    {/* Table */}
+                    <table className="editors-table">
+                        <tr className="title-row">
+                            <th className="title-element-big">Correo</th>
+                            <th className="title-element-small">Opciones</th>
+                        </tr>
+                        {users.map(user =>
+                            <tr className="content-row">
+                                <td className="content-element-big">{user.email}</td>
+                                <td className="content-element-small">
+                                    <UserOptionsComponent usersNumber={users.length} clickEditButtonCallback={() => openModal(user)} clickDeleteButtonCallback={() => openDeleteUserModal(user)} />
+                                </td>
+                            </tr>
+                        )}
+                    </table>
+                    {/* Modal to create or edit a user */}
+                    <Modal
+                        isOpen={modalIsOpen}
+                        onRequestClose={() => closeModal(true)}
+                        style={modalUserCustomStyles}
+                        ariaHideApp={false}
+                        contentLabel="New/Edit User Modal">
+                        <UserModalComponent
+                            closeModal={() => closeModal(true)}
+                            saveUserCallBack={saveUser}
+                            editUserMode={editUserMode}
+                            userToEdit={userToEdit}
+                            editUserCallBack={editUser} />
+                    </Modal>
+                    {/* Modal to delete a user */}
+                    <Modal
+                        isOpen={modalDeleteUserIsOpen}
+                        onRequestClose={closeDeleteUserModal}
+                        style={modalDeleteSectionCustomStyles}
+                        ariaHideApp={false}
+                        contentLabel="Delete User Modal">
+                        <DeleteUserModalComponent
+                            closeDeleteUserModal={closeDeleteUserModal}
+                            confirmDeleteUser={confirmDeleteUser} />
+                    </Modal>
+                </>)
+            }
+            {
+                !possibleEditor && (
+                    <UnauthorizedComponent />
+                )
+            }
         </div>
     );
 }
