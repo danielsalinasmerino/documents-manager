@@ -66,11 +66,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// TO DO
-app.get((CONTEXT_PATH_1 + '/api/user-logged'), function routeHandler(req, res) {
-    res.json({email: "Email"});
-});
-
 // We configure the routes and also CAS
 const path = require('path');
 if (DEV_ENVIRONMENT) {
@@ -111,6 +106,12 @@ else {
         res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
     });
 }
+
+// TO DO
+app.get((CONTEXT_PATH_1 + '/api/user-logged'), function routeHandler(req, res) {
+    //res.json({email: "Email"});
+    res.json(req.session.user);
+});
 
 // Routing: We could use any route, we choose CONTEXT_PATH_1 just because we want
 const routingStart = normalize(CONTEXT_PATH_1) + '/api';
