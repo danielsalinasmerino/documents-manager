@@ -62,8 +62,8 @@ var controller = {
     },
 
     deleteUserById: function(req, res){
-        const isUser = req.params.isUser;
-        const query = User.where({isUser: isUser});
+        const idUser = req.params.idUser;
+        const query = User.where({idUser: idUser});
         query.findOne((err, userFound) => {
             if(err) return res.status(500).send({message: "Error on Delete User by ID."});
             if(!userFound) return res.status(404).send({message: "User to Delete not found."});
