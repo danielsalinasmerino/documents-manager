@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import SectionModalBottomButtons from '../section-modal-bottom-buttons/SectionModalBottomButtons';
-import SectionDocumentsInput from '../section-documents-input/SectionDocumentsInput';
-import SectionPositionInput from '../section-position-input/SectionPositionInput';
 import SectionModalHeader from '../section-modal-header/SectionModalHeader';
 import SectionTextInput from '../section-text-input/SectionTextInput';
 
