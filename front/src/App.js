@@ -32,30 +32,6 @@ function App() {
 
   useEffect(() => {
 
-    try {
-      // GET CAS user logged
-      fetch((readUserLoggedInEndpoint), getRequestOptions)
-        .then(response => response.json())
-        .then(result => {
-          setCasUserLogged(result);
-          // We check if the user COULD edit the platform
-          for (let i = 0; i < users.length; i++) {
-            console.log('')
-            console.log(users[i].email)
-            console.log(result.mail)
-            console.log('')
-            if (users[i].email === result.mail) {
-              console.log('Possible')
-              setPossibleEditor(true);
-            }
-          }
-        })
-        .catch(error => console.log('error', error));
-    }
-    catch {
-      setCasUserLogged({ mail: "random@mail.com" })
-    }
-
     // GET sections based on the context
     fetch((readSectionsEndpoint + '/' + portalName), getRequestOptions)
       .then(response => response.text())
@@ -77,6 +53,30 @@ function App() {
       .then(response => response.text())
       .then(result => {
         setUsers(JSON.parse(result));
+        const resultUsers = result;
+        try {
+          // GET CAS user logged
+          fetch((readUserLoggedInEndpoint), getRequestOptions)
+            .then(response => response.json())
+            .then(result => {
+              setCasUserLogged(result);
+              // We check if the user COULD edit the platform
+              for (let i = 0; i < resultUsers.length; i++) {
+                console.log('')
+                console.log(resultUsers[i].email)
+                console.log(result.mail)
+                console.log('')
+                if (resultUsers[i].email === result.mail) {
+                  console.log('Possible')
+                  setPossibleEditor(true);
+                }
+              }
+            })
+            .catch(error => console.log('error', error));
+        }
+        catch {
+          setCasUserLogged({ mail: "random@mail.com" })
+        }
       })
       .catch(error => console.log('error', error));
 
