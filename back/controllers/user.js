@@ -29,7 +29,7 @@ var controller = {
             if(err) return res.status(500).send({message: "Error on Read Users."});
             if(!users) return res.status(404).send({message: "It was not possible to Read the Users."});
 
-            return res.status(200).send(users);
+            return res.status(200).send(users.sort((a, b) => (a.email > b.email) ? 1 : -1));
         });
     },
 

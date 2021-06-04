@@ -4,21 +4,67 @@ import React, { useState } from 'react';
 import DeleteUserModalComponent from '../delete-user-modal-component/DeleteUserModalComponent';
 import EditorsManagementButtonsMenuComponent from '../editors-management-buttons-menu-component/EditorsManagementButtonsMenuComponent';
 import HeaderComponent from '../header-component/HeaderComponent';
+import UserModalComponent from '../user-modal-component/UserModalComponent';
 import UserOptionsComponent from '../user-options-component/UserOptionsComponent';
 
 import { createUserEndpoint, deleteUserByIdEndpoint, updateUserByIdEndpoint } from '../../services/endpoints';
 import { functionPostRequestOptions, functionPutRequestOptions, deleteRequestOptions } from '../../services/requestOptions';
+import { modalUserCustomStyles } from '../../helpers/constants/modalUserCustomStyles';
 import { modalDeleteSectionCustomStyles } from '../../helpers/constants/modalDeleteSectionCustomStyles';
 
 import './EditorsManagementComponent.scss';
 
 function EditorsManagementComponent({ portalName, users, setUsersCallback }) {
 
-    /* const [modalIsOpen, setIsOpen] = useState(false);
-    const [editSectionMode, setEditSectionMode] = useState(false);
-    const [sectionToEdit, setSectionToEdit] = useState({}); */
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [editUserMode, setEditUserMode] = useState(false);
+    const [userToEdit, setUserToEdit] = useState({});
     const [modalDeleteUserIsOpen, setModalDeleteUserIsOpen] = useState(false);
     const [userToDelete, setUserToDelete] = useState({});
+
+    const openModal = (userToEdit = {}) => {
+        if (userToEdit !== {} && userToEdit.email) {
+            setUserToEdit(userToEdit);
+            setEditUserMode(true);
+        }
+        setIsOpen(true);
+    }
+
+    const closeModal = () => {
+        setUserToEdit({});
+        setEditUserMode(false);
+        setIsOpen(false);
+    }
+
+    const saveUser = (user) => {
+        // CREATE a user
+        var raw = JSON.stringify(user);
+        const postRequestOptions = functionPostRequestOptions(raw);
+        fetch(createUserEndpoint, postRequestOptions)
+            .then(response => response.text())
+            .then(result => {
+                //console.log(result)
+            })
+            .catch(error => console.log('error', error));
+        users.push(user);
+        setUsersCallback([...users.sort((a, b) => (a.email > b.email) ? 1 : -1)]);
+        closeModal();
+    }
+
+    const editUser = (user) => {
+        delete user._id;
+        // UPDATE a user
+        var raw = JSON.stringify(user);
+        const putRequestOptions = functionPutRequestOptions(raw);
+        fetch((updateUserByIdEndpoint + '/' + user.idUser), putRequestOptions)
+            .then(response => response.text())
+            .then(result => {
+                //console.log(result)
+            })
+            .catch(error => console.log('error', error));
+        setUsersCallback([...users.sort((a, b) => (a.email > b.email) ? 1 : -1)]);
+        closeModal();
+    }
 
     const openDeleteUserModal = (userToDelete = {}) => {
         setUserToDelete(userToDelete);
@@ -46,7 +92,7 @@ function EditorsManagementComponent({ portalName, users, setUsersCallback }) {
             })
             .catch(error => console.log('error', error));
         users.splice(index, 1);
-        setUsersCallback([...users]);
+        setUsersCallback([...users.sort((a, b) => (a.email > b.email) ? 1 : -1)]);
         closeDeleteUserModal();
     }
 
@@ -54,7 +100,7 @@ function EditorsManagementComponent({ portalName, users, setUsersCallback }) {
         <div className="main-wrapper">
             <HeaderComponent portalName={portalName} />
             <h1>Bienvenido/a a la vista de gestión de editores</h1>
-            <EditorsManagementButtonsMenuComponent />
+            <EditorsManagementButtonsMenuComponent openModalCallback={openModal}/>
             {/* Table */}
             <table className="editors-table">
                 <tr className="title-row">
@@ -65,32 +111,25 @@ function EditorsManagementComponent({ portalName, users, setUsersCallback }) {
                     <tr className="content-row">
                         <td className="content-element-big">{user.email}</td>
                         <td className="content-element-small">
-                            <UserOptionsComponent clickEditButtonCallback={() => console.log('Edit')} clickDeleteButtonCallback={() => openDeleteUserModal(user)} />
+                            <UserOptionsComponent usersNumber={users.length} clickEditButtonCallback={() => openModal(user)} clickDeleteButtonCallback={() => openDeleteUserModal(user)} />
                         </td>
                     </tr>
                 )}
             </table>
-            {/* <EditionButtonsMenuComponent openModalCallback={openModal}/>
-            <SectionsComponent sections={sections} documents={documents} editableSections={true} editSectionCallback={openModal} deleteSectionCallback={openDeleteSectionModal}/>
-             */}
-            {/* Modal to create or edit a section */}
-            {/* <Modal
+            {/* Modal to create or edit a user */}
+            <Modal
               isOpen={modalIsOpen}
               onRequestClose={() => closeModal(true)}
-              style={modalCustomStyles}
+              style={modalUserCustomStyles}
               ariaHideApp={false}
-              contentLabel="New/Edit Section Modal">
-              <SectionModalComponent
+              contentLabel="New/Edit User Modal">
+              <UserModalComponent
                 closeModal={() => closeModal(true)}
-                saveSectionCallBack={saveSection}
-                saveDocumentCallback={saveDocument}
-                editSectionMode={editSectionMode}
-                sectionToEdit={sectionToEdit}
-                documentsToEdit={documentsToEdit}
-                editSectionCallBack={editSection}
-                editDocumentCallback={editDocument}
-                sectiongsLength={sections.length}/>
-            </Modal> */}
+                saveUserCallBack={saveUser}
+                editUserMode={editUserMode}
+                userToEdit={userToEdit}
+                editUserCallBack={editUser}/>
+            </Modal>
             {/* Modal to delete a user */}
             <Modal
                 isOpen={modalDeleteUserIsOpen}

@@ -11,12 +11,14 @@ import deleteWhiteImageRoute from '../../assets/images/section-options/delete-wh
 
 import './UserOptionsComponent.scss';
 
-function UserOptionsComponent({ clickEditButtonCallback, clickDeleteButtonCallback }) {
+function UserOptionsComponent({ usersNumber, clickEditButtonCallback, clickDeleteButtonCallback }) {
 
   return (
     <div className="sectionOptions">
-        <SectionOptionComponent normalImageRoute={editImageRoute} hoveredImageRoute={editWhiteImageRoute} altText={"Edit"} tooltipText={"Editar usuario"} clickOption={clickEditButtonCallback}/>
-        <SectionOptionComponent normalImageRoute={deleteImageRoute} hoveredImageRoute={deleteWhiteImageRoute} altText={"Delete"} tooltipText={"Borrar usuario"} clickOption={clickDeleteButtonCallback}/>
+      <SectionOptionComponent normalImageRoute={editImageRoute} hoveredImageRoute={editWhiteImageRoute} altText={"Edit"} tooltipText={"Editar usuario"} clickOption={clickEditButtonCallback} />
+      { (usersNumber > 1) &&
+        <SectionOptionComponent normalImageRoute={deleteImageRoute} hoveredImageRoute={deleteWhiteImageRoute} altText={"Delete"} tooltipText={"Borrar usuario"} clickOption={clickDeleteButtonCallback} />
+      }
     </div>
   );
 }

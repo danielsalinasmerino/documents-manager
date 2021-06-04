@@ -7,14 +7,14 @@ import { getRoutingInfo } from '../../helpers/functions/functions';
 
 import './EditorsManagementButtonsMenuComponent.scss';
 
-function EditorsManagementButtonsMenuComponent(){
+function EditorsManagementButtonsMenuComponent({ openModalCallback }){
 
     const routingInfo = getRoutingInfo();
     const portalName = routingInfo.portalName;
 
     return (
         <div className="buttonsMenu editionView">
-            <StyledButtonComponent buttonText={'Añadir Editor'}/>
+            <StyledButtonComponent clickButton={openModalCallback} buttonText={'Añadir Editor'}/>
             <Link className="link-clean" to={"/" + portalName + "/gestor-documental/edicion-contenidos"}>
                 <StyledButtonComponent buttonText={'Vista de Edición'}/>
             </Link>
