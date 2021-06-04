@@ -58,15 +58,15 @@ function App() {
           // GET CAS user logged
           fetch((readUserLoggedInEndpoint), getRequestOptions)
             .then(response => response.json())
-            .then(result => {
-              setCasUserLogged(result);
+            .then(casResult => {
+              setCasUserLogged(casResult);
               // We check if the user COULD edit the platform
               for (let i = 0; i < resultUsers.length; i++) {
                 console.log('')
                 console.log(resultUsers[i].email)
-                console.log(result.mail)
+                console.log(casResult.mail)
                 console.log('')
-                if (resultUsers[i].email === result.mail) {
+                if (resultUsers[i].email === casResult.mail) {
                   console.log('Possible')
                   setPossibleEditor(true);
                 }
