@@ -53,7 +53,7 @@ function App() {
       .then(response => response.text())
       .then(result => {
         setUsers(JSON.parse(result));
-        const resultUsers = result;
+        const resultUsers = JSON.parse(result);
         try {
           // GET CAS user logged
           fetch((readUserLoggedInEndpoint), getRequestOptions)
