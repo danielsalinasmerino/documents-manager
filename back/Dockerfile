@@ -9,5 +9,6 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install
 COPY . .
 
+# start app (in case we want to start the App, use: CMD ["npm", "start"])
 # start app (in case we want to populate the DB, use: CMD ["npm", "run", "populate"])
-CMD ["npm", "start"]
+CMD ["npm", "run", "populate"]
