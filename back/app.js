@@ -2,6 +2,7 @@
 
 // Required modules
 var express = require("express");
+var fileUpload = require("express-fileupload");
 var session = require('express-session');
 const normalize = require('normalize-path');
 let CASAuthentication = require('cas-authentication');
@@ -31,6 +32,8 @@ const SESSION_SECRET = process.env.SESSION_SECRET;
 
 // We create our App
 var app = express();
+// We configure this in order to be able to upload files
+app.use(fileUpload());
 
 // CORS
 app.use((req, res, next) => {
@@ -78,32 +81,32 @@ else {
     app.use(normalize(CONTEXT_PATH_2), express.static(path.join(__dirname, 'client/build')));
     app.use(normalize(CONTEXT_PATH_3), express.static(path.join(__dirname, 'client/build')));
     // If we are not on DEV (we are on PRUEBAS or PROD), we activate the CAS service
-    app.get((CONTEXT_PATH_1 + '/edicion-contenidos'), cas.bounce, function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    app.get((CONTEXT_PATH_1 + '/edicion-contenidos'), cas.bounce, function (req, res) {
+        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
     });
-    app.get((CONTEXT_PATH_2 + '/edicion-contenidos'), cas.bounce, function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    app.get((CONTEXT_PATH_2 + '/edicion-contenidos'), cas.bounce, function (req, res) {
+        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
     });
-    app.get((CONTEXT_PATH_3 + '/edicion-contenidos'), cas.bounce, function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    app.get((CONTEXT_PATH_3 + '/edicion-contenidos'), cas.bounce, function (req, res) {
+        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
     });
-    app.get((CONTEXT_PATH_1 + '/gestion-editores'), cas.bounce, function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    app.get((CONTEXT_PATH_1 + '/gestion-editores'), cas.bounce, function (req, res) {
+        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
     });
-    app.get((CONTEXT_PATH_2 + '/gestion-editores'), cas.bounce, function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    app.get((CONTEXT_PATH_2 + '/gestion-editores'), cas.bounce, function (req, res) {
+        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
     });
-    app.get((CONTEXT_PATH_3 + '/gestion-editores'), cas.bounce, function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    app.get((CONTEXT_PATH_3 + '/gestion-editores'), cas.bounce, function (req, res) {
+        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
     });
-    app.get((CONTEXT_PATH_1 + '/vista-previa'), function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    app.get((CONTEXT_PATH_1 + '/vista-previa'), function (req, res) {
+        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
     });
-    app.get((CONTEXT_PATH_2 + '/vista-previa'), function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    app.get((CONTEXT_PATH_2 + '/vista-previa'), function (req, res) {
+        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
     });
-    app.get((CONTEXT_PATH_3 + '/vista-previa'), function(req, res) {
-        res.sendFile('index.html', {root: path.join(__dirname, 'client/build')});
+    app.get((CONTEXT_PATH_3 + '/vista-previa'), function (req, res) {
+        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
     });
 }
 
@@ -111,6 +114,25 @@ else {
 app.get((CONTEXT_PATH_1 + '/api/user-logged'), function routeHandler(req, res) {
     //res.json({mail: "Email"});
     res.json(req.session.user);
+});
+
+// Upload Files Endpoint
+app.post((CONTEXT_PATH_1 + '/api/upload-document'), (req, res) => {
+
+    if (!req.files) {
+        return res.status(400).json({ msg: 'No file uploaded' });
+    }
+
+    const file = req.files.file;
+    const oldFileName = file.name;
+    const newFileName = functions.makeIdLong() + '_' +  oldFileName;
+
+    file.mv(`./client/public/uploads/${newFileName}`, err => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.json({ oldFileName: oldFileName, newFileName: newFileName, filePath: `/uploads/${newFileName}` });
+    });
 });
 
 // Routing: We could use any route, we choose CONTEXT_PATH_1 just because we want

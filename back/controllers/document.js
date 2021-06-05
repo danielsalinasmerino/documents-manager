@@ -91,25 +91,6 @@ var controller = {
         });
     },
 
-    /*  uploadImage: function(req, res){
-        var projectId = req.params.id;
-        var fileName = 'Imagen no subida...';
-
-        if(req.files){
-            
-            var filePath = req.files.image.path;
-            var fileSplit = filePath.split('\\');
-            var fileName = fileSplit[1];
-
-            Project.findByIdAndUpdate(projectId, {image: fileName}, {new: true}, (err, projectUpdated) => {
-                if(err) return res.status(500).send({message: 'Error al actualizar el proyecto.'});
-                if(!projectUpdated) return res.status(404).send({message: 'No se pudo actualizar el proyectos.'});
-    
-                return res.status(200).send({project: projectUpdated});
-            });
-        }
-    }, */
-
 };
 
 module.exports = controller;
