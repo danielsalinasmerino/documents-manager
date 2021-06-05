@@ -119,19 +119,20 @@ app.get((CONTEXT_PATH_1 + '/api/user-logged'), function routeHandler(req, res) {
 // Upload Files Endpoint
 app.post((CONTEXT_PATH_1 + '/api/upload-document'), (req, res) => {
 
-    if (!req.files) {
+    if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).json({ msg: 'No file uploaded' });
     }
 
     const file = req.files.file;
     const oldFileName = file.name;
     const newFileName = functions.makeIdLong() + '_' +  oldFileName;
+    const uploadPathForFile = `${__dirname}/client/public/uploads/${newFileName}`;
 
-    file.mv(`./client/public/uploads/${newFileName}`, err => {
+    file.mv(uploadPathForFile, err => {
         if (err) {
             return res.status(500).send(err);
         }
-        res.json({ oldFileName: oldFileName, newFileName: newFileName, filePath: `/uploads/${newFileName}` });
+        res.json({ oldFileName: oldFileName, newFileName: newFileName, filePath: uploadPathForFile });
     });
 });
 
