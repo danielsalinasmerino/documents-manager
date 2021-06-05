@@ -27,7 +27,7 @@ function SectionDocumentsInput({ addDocumentCallback, onChangeDocumentCallback, 
                                 type="file" 
                                 id="file" 
                                 name="myfile"
-                                onChange={(e) => onChangeDocumentCallback(e.target.value, element.key, false)}/>}
+                                onChange={(e) => onChangeDocumentCallback(e, element.key, false)}/>}
                             {(element.disableInput) && <p className="lineTextFullWidth"><b>Documento: {element.originalDocumentName}</b></p>}
                             <img className="optionDocumentImage" onClick={() => deleteDocumentCallback(element.key, false)} src={deleteImageRoute} alt={"Borrar documento"}/>
                         </div>
@@ -62,7 +62,7 @@ function SectionDocumentsInput({ addDocumentCallback, onChangeDocumentCallback, 
                             type="text" 
                             id="file" 
                             value={element.originalDocumentName}
-                            onChange={(e) => onChangeDocumentCallback(e.target.value, element.key, true)}/>
+                            onChange={(e) => onChangeDocumentCallback(e, element.key, true)}/>
                             <img className="optionDocumentImage" onClick={() => deleteDocumentCallback(element.key, true)} src={deleteImageRoute} alt={"Borrar enlace"}/>
                         </div>
                             { element.uploaded && 

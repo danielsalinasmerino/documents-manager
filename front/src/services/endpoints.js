@@ -4,6 +4,8 @@ const endpointStart = variables.endpointStart;
 
 // User logged endpoint
 export const readUserLoggedInEndpoint = endpointStart + "user-logged";
+// Upload document
+export const uploadFileEndpoint = endpointStart + "upload-file";
 
 // Sections related endpoints
 export const createSectionEndpoint = endpointStart + "sections";
