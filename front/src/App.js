@@ -59,6 +59,7 @@ function App() {
             .then(response => response.json())
             .then(casResult => {
               // We check if the user COULD edit the platform
+              console.log(casResult);
               for (let i = 0; i < resultUsers.length; i++) {
                 if (resultUsers[i].email === casResult.mail) {
                   setPossibleEditor(true);
