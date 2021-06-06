@@ -200,3 +200,16 @@ export function formatStringFirstLetterCapital(str) {
     }
     return splitStr.join(' ');
 }
+
+//
+// Given a  String, or an array of Strings, we check for equality with another String
+//
+export function checkStringWithStringOrArray(str, strOrArray) {
+    if(Array.isArray(strOrArray)){
+        return strOrArray.includes(str);
+    }
+    else {
+        const result = (typeof strOrArray === "string") ? (strOrArray === str) :  (false);
+        return result;
+    }
+}

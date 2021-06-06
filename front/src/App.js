@@ -10,7 +10,7 @@ import EditionComponent from './components/edition-component/EditionComponent';
 import EditorsManagementComponent from './components/editors-management-component/EditorsManagementComponent';
 import PreviewComponent from './components/preview-component/PreviewComponent';
 
-import { formatStringFirstLetterCapital, getRoutingInfo, sortArrayOfSectionsByPosition } from './helpers/functions/functions';
+import { checkStringWithStringOrArray, formatStringFirstLetterCapital, getRoutingInfo, sortArrayOfSectionsByPosition } from './helpers/functions/functions';
 import { readUserLoggedInEndpoint, readSectionsEndpoint, readDocumentsEndpoint, readUsersEndpoint, updateUserByIdEndpoint } from './services/endpoints';
 import { functionPutRequestOptions, getRequestOptions } from './services/requestOptions';
 
@@ -59,9 +59,9 @@ function App() {
             .then(response => response.json())
             .then(casResult => {
               // We check if the user COULD edit the platform
-              console.log(casResult);
               for (let i = 0; i < resultUsers.length; i++) {
-                if (resultUsers[i].email === casResult.mail) {
+                const casResultUserIsOnOurDB = checkStringWithStringOrArray(resultUsers[i].email, casResult.mail);
+                if (casResultUserIsOnOurDB) {
                   setPossibleEditor(true);
                   const displayNameForEditor = formatStringFirstLetterCapital(casResult.displayname || '-'); 
                   resultUsers[i].name = displayNameForEditor;
