@@ -7,7 +7,7 @@ import { getRoutingInfo } from '../../helpers/functions/functions';
 
 import './UnauthorizedButtonsMenuComponent.scss';
 
-function UnauthorizedButtonsMenuComponent({ }) {
+function UnauthorizedButtonsMenuComponent() {
 
     const routingInfo = getRoutingInfo();
     const portalName = routingInfo.portalName;

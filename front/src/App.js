@@ -10,9 +10,9 @@ import EditionComponent from './components/edition-component/EditionComponent';
 import EditorsManagementComponent from './components/editors-management-component/EditorsManagementComponent';
 import PreviewComponent from './components/preview-component/PreviewComponent';
 
-import { getRoutingInfo, sortArrayOfSectionsByPosition } from './helpers/functions/functions';
-import { readUserLoggedInEndpoint, readSectionsEndpoint, readDocumentsEndpoint, readUsersEndpoint } from './services/endpoints';
-import { getRequestOptions } from './services/requestOptions';
+import { formatStringFirstLetterCapital, getRoutingInfo, sortArrayOfSectionsByPosition } from './helpers/functions/functions';
+import { readUserLoggedInEndpoint, readSectionsEndpoint, readDocumentsEndpoint, readUsersEndpoint, updateUserByIdEndpoint } from './services/endpoints';
+import { functionPutRequestOptions, getRequestOptions } from './services/requestOptions';
 
 import './App.scss';
 
@@ -62,6 +62,18 @@ function App() {
               for (let i = 0; i < resultUsers.length; i++) {
                 if (resultUsers[i].email === casResult.mail) {
                   setPossibleEditor(true);
+                  var resultUserToSaveName = resultUsers[i];
+                  delete resultUserToSaveName._id;
+                  resultUserToSaveName.name = formatStringFirstLetterCapital(casResult.displayname || '-');
+                  // UPDATE a user
+                  var raw = JSON.stringify(resultUserToSaveName);
+                  const putRequestOptions = functionPutRequestOptions(raw);
+                  fetch((updateUserByIdEndpoint + '/' + resultUserToSaveName.idUser), putRequestOptions)
+                    .then(response => response.text())
+                    .then(result => {
+                      //console.log(result)
+                    })
+                    .catch(error => console.log('error', error));
                 }
               }
             })

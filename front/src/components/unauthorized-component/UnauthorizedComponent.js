@@ -4,7 +4,7 @@ import UnathorizedButtonsMenuComponent from '../unauthorized-buttons-menu-compon
 
 import './UnauthorizedComponent.scss';
 
-function UnauthorizedComponent({ }) {
+function UnauthorizedComponent() {
 
     return (
         <>

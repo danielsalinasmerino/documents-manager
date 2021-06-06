@@ -178,7 +178,7 @@ export function getRoutingInfo() {
     const routeFinal = "/" + portalName + "/gestor-documental/" + currentRoute;
     // We edit the information regarding the portal to improve the UX
     var portalNameFront = portalName.toUpperCase();
-    if(portalNameFront === 'ESTUDIANTES'){
+    if (portalNameFront === 'ESTUDIANTES') {
         portalNameFront = 'Estudiantes';
     }
 
@@ -188,4 +188,15 @@ export function getRoutingInfo() {
         routeFinal: routeFinal,
         portalNameFront: portalNameFront
     }
+}
+
+//
+// Given a string, we capitalize the first letter for each word (to correctly show, for example, a user name)
+//
+export function formatStringFirstLetterCapital(str) {
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' ');
 }
