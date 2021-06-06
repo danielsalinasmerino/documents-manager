@@ -112,11 +112,13 @@ function EditorsManagementComponent({ portalName, users, setUsersCallback, possi
                     <table className="editors-table">
                         <tr className="title-row">
                             <th className="title-element-big">Correo</th>
+                            <th className="title-element-big">Nombre</th>
                             <th className="title-element-small">Opciones</th>
                         </tr>
                         {users.map(user =>
                             <tr className="content-row">
                                 <td className="content-element-big">{user.email}</td>
+                                <td className="content-element-big">{user.name}</td>
                                 <td className="content-element-small">
                                     <UserOptionsComponent usersNumber={users.length} clickEditButtonCallback={() => openModal(user)} clickDeleteButtonCallback={() => openDeleteUserModal(user)} />
                                 </td>
