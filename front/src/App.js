@@ -27,7 +27,6 @@ function App() {
   const [sections, setSections] = useState([]);
   const [documents, setDocuments] = useState([]);
   const [users, setUsers] = useState([]);
-  const [casUserLogged, setCasUserLogged] = useState({});
   const [possibleEditor, setPossibleEditor] = useState(false);
 
   useEffect(() => {
@@ -59,7 +58,6 @@ function App() {
           fetch((readUserLoggedInEndpoint), getRequestOptions)
             .then(response => response.json())
             .then(casResult => {
-              setCasUserLogged(casResult);
               // We check if the user COULD edit the platform
               for (let i = 0; i < resultUsers.length; i++) {
                 if (resultUsers[i].email === casResult.mail) {
@@ -70,7 +68,7 @@ function App() {
             .catch(error => console.log('error', error));
         }
         catch {
-          setCasUserLogged({ mail: "random@mail.com" })
+          setPossibleEditor(false);
         }
       })
       .catch(error => console.log('error', error));

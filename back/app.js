@@ -125,7 +125,7 @@ app.post((CONTEXT_PATH_1 + '/api/upload-file'), (req, res) => {
 
     const file = req.files.file;
     const oldFileName = file.name;
-    const newFileName = functions.makeIdLong(8) + '_' +  oldFileName;
+    const newFileName = functions.makeIdShort() + '_' +  oldFileName;
     const uploadPathForFile = `${__dirname}/client/public/uploads/${newFileName}`;
 
     file.mv(uploadPathForFile, err => {

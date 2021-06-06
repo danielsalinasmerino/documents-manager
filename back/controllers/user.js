@@ -15,6 +15,7 @@ var controller = {
         user.idUser = params.idUser;
         user.email = params.email;
         user.role = params.role;
+        user.name = params.name;
 
         user.save((err, userStored) => {
             if(err) return res.status(500).send({message: "Error on Create User."});

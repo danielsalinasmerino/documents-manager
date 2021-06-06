@@ -8,7 +8,7 @@ function logWithFormat(message){
 //
 // Creates an id given the length needed
 //
-function makeIdLong(length = 48) {
+function makeIdShort(length = 8) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
@@ -18,4 +18,4 @@ function makeIdLong(length = 48) {
     return result;
 }
 
-module.exports = { logWithFormat, makeIdLong };
+module.exports = { logWithFormat, makeIdShort };

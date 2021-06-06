@@ -35,6 +35,7 @@ function UserModalComponent({ closeModal, saveUserCallBack, editUserMode, userTo
                 makeId(),
                 (emailUser.trim()).toLowerCase(),
                 'editor',
+                '-'
             );
             saveUserCallBack(newUser);
         }
