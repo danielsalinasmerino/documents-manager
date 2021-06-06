@@ -52,7 +52,7 @@ function App() {
       .then(response => response.text())
       .then(result => {
         setUsers(JSON.parse(result));
-        const resultUsers = JSON.parse(result);
+        var resultUsers = JSON.parse(result);
         try {
           // GET CAS user logged
           fetch((readUserLoggedInEndpoint), getRequestOptions)
@@ -62,9 +62,11 @@ function App() {
               for (let i = 0; i < resultUsers.length; i++) {
                 if (resultUsers[i].email === casResult.mail) {
                   setPossibleEditor(true);
+                  const displayNameForEditor = formatStringFirstLetterCapital(casResult.displayname || '-'); 
+                  resultUsers[i].name = displayNameForEditor;
+                  setUsers(resultUsers);
                   var resultUserToSaveName = resultUsers[i];
                   delete resultUserToSaveName._id;
-                  resultUserToSaveName.name = formatStringFirstLetterCapital(casResult.displayname || '-');
                   // UPDATE a user
                   var raw = JSON.stringify(resultUserToSaveName);
                   const putRequestOptions = functionPutRequestOptions(raw);
