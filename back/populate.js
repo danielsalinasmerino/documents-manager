@@ -53,7 +53,7 @@ function createNewUserWithMockData(data){
     user.idUser = data.idUser;
     user.email = data.email;
     user.role = data.role;
-    user.name = user.name;
+    user.name = data.name;
     return user;
 }
 
