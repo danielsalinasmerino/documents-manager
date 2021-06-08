@@ -24,6 +24,13 @@ const mockUsers = [
         name: '-'  
     },
 
+    {
+        idUser: "9bKo9nIkKV4s3iKItC3JjKSadoSVIzDc",
+        email: "carolina.sanz@upm.es",
+        role: 'editor',
+        name: '-'  
+    },
+
 ];
 
 module.exports =  mockUsers;
