@@ -4,6 +4,14 @@
 const mockUsers = [
 
     {
+        idUser: "8bNo8nIkKV4s8iKItC3JjKSidoSVIzCz",
+        email: "secretario.etsit@upm.es",
+        role: 'admin',
+        name: '-'  
+    },
+
+
+    {
         idUser: "9bNo9nIkKV4s3iKItC3JjKSadoSVIzCz",
         email: "daniel.salinas.merino@alumnos.upm.es",
         role: 'editor',
