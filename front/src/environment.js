@@ -1,10 +1,40 @@
 //
 // Create the set of variables for the project
 //
-const dockerDeploy = true; //change to false when you are working on local 
+const DEV = false;
+const PRUEBAS = true;
+const PROD = false;
 
-export const variables = {
-    service: (dockerDeploy) ? ('https://pruebas.etsit.upm.es') : ("http://localhost:3009"),
-    endpointStart: (dockerDeploy) ? ('https://pruebas.etsit.upm.es/pas/gestor-documental/api/') : ("http://localhost:3009/pas/gestor-documental/api/"),
-    //port: 3009, (YOU CAN CHECK THIS ON docker-compose.yml)
+if((DEV + PRUEBAS + PROD) !== 1 || (DEV + PRUEBAS + PROD) > 1){
+    console.log('Please, configure correctly this file. One, and only one, of the variables must be true.')
 }
+
+const endpointStartHelper = "pas/gestor-documental/api/";
+
+const localVariables = {
+    service: "http://localhost:3009",
+    endpointStart: "http://localhost:3009/" + endpointStartHelper,
+}
+
+const pruebasVariables = {
+    service: "https://pruebas.etsit.upm.es",
+    endpointStart: "https://pruebas.etsit.upm.es/" + endpointStartHelper,
+}
+
+const prodVariables = {
+    // TO DO
+}
+
+var finalVariables;
+
+if(DEV){
+    finalVariables = localVariables;
+}
+if(PRUEBAS){
+    finalVariables = pruebasVariables;
+}
+if(PROD){
+    finalVariables = prodVariables;
+}
+
+export const variables = finalVariables;
