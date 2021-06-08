@@ -38,7 +38,7 @@ mongoose.connect(connectionDB)
             // Admin handler
             functions.logWithFormat("We must check if the admin user is on the DB.");
             User.find({}).exec((err, users) => {
-                if ((users.filter(user => user.role === 'admin')).length < 1) {
+                if ((users.filter(user => user.role === 'admin')).length >= 1) {
                     functions.logWithFormat("We have found an Admin. We do nothing.");
                 }
                 else {
