@@ -29,6 +29,8 @@ const DEV_ENVIRONMENT = (process.env.DEV === 'true');
 //functions.logWithFormat('DEV_ENVIRONMENT ' + DEV_ENVIRONMENT);
 const SESSION_SECRET = process.env.SESSION_SECRET;
 //functions.logWithFormat('SESSION_SECRET ' + SESSION_SECRET);
+const PATH_FILES = process.env.PATH_FILES;
+//functions.logWithFormat('PATH_FILES ' + PATH_FILES);
 
 // We create our App
 var app = express();
