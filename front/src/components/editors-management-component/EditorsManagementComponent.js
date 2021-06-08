@@ -120,7 +120,12 @@ function EditorsManagementComponent({ portalName, users, setUsersCallback, possi
                                 <td className="content-element-big">{user.email}</td>
                                 <td className="content-element-big">{user.name}</td>
                                 <td className="content-element-small">
-                                    <UserOptionsComponent usersNumber={users.length} clickEditButtonCallback={() => openModal(user)} clickDeleteButtonCallback={() => openDeleteUserModal(user)} />
+                                    {(user.role === 'editor') &&
+                                        <UserOptionsComponent clickEditButtonCallback={() => openModal(user)} clickDeleteButtonCallback={() => openDeleteUserModal(user)} />
+                                    }
+                                    {(user.role === 'admin') &&
+                                        <div className='admin-text'>Administrador</div>
+                                    }
                                 </td>
                             </tr>
                         )}
