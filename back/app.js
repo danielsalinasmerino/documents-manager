@@ -118,6 +118,15 @@ app.get((CONTEXT_PATH_1 + '/api/user-logged'), function routeHandler(req, res) {
     res.json(req.session.user);
 });
 
+// We "trick" the routes to recover correctly the files that we store
+app.use(
+    path.join(CONTEXT_PATH_1, 'pdfs'),
+    express.static(path.join(PATH_FILES, 'pdfs'))
+);
+
+functions.logWithFormat(path.join(CONTEXT_PATH_1, 'pdfs'));
+functions.logWithFormat(path.join(PATH_FILES, 'pdfs'));
+
 // Upload Files Endpoint
 app.post((CONTEXT_PATH_1 + '/api/upload-file'), (req, res) => {
 
@@ -127,8 +136,10 @@ app.post((CONTEXT_PATH_1 + '/api/upload-file'), (req, res) => {
 
     const file = req.files.file;
     const oldFileName = file.name;
-    const newFileName = functions.makeIdShort() + '_' +  oldFileName;
+    const newFileName = functions.makeIdShort() + '_' + oldFileName;
     const uploadPathForFile = `${__dirname}/client/public/uploads/${newFileName}`;
+
+    functions.logWithFormat(uploadPathForFile);
 
     file.mv(uploadPathForFile, err => {
         if (err) {
