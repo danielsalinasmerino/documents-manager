@@ -118,14 +118,13 @@ app.get((CONTEXT_PATH_1 + '/api/user-logged'), function routeHandler(req, res) {
     res.json(req.session.user);
 });
 
-// We "trick" the routes to recover correctly the files that we store
-app.use(
-    path.join(CONTEXT_PATH_1, 'files'),
-    express.static(PATH_FILES)
-);
-
-functions.logWithFormat(path.join(CONTEXT_PATH_1, 'files'));
-functions.logWithFormat(PATH_FILES);
+// We "trick" the routes to recover correctly the files that we store if we are not on DEV
+if(!DEV_ENVIRONMENT){
+    app.use(
+        path.join(CONTEXT_PATH_1, 'files'),
+        express.static(PATH_FILES)
+    );
+}
 
 // Upload Files Endpoint
 app.post((CONTEXT_PATH_1 + '/api/upload-file'), (req, res) => {
@@ -137,16 +136,24 @@ app.post((CONTEXT_PATH_1 + '/api/upload-file'), (req, res) => {
     const file = req.files.file;
     const oldFileName = file.name;
     const newFileName = functions.makeIdShort() + '_' + oldFileName;
-    //const uploadPathForFile = `${__dirname}/client/public/uploads/${newFileName}`;
-    const uploadPathForFile = `..${PATH_FILES}/${newFileName}`
-
-    functions.logWithFormat(uploadPathForFile);
+    var uploadPathForFile;
+    var returnRouteFront;
+    if(DEV_ENVIRONMENT){
+        // On local, we play with the documents
+        uploadPathForFile = `${__dirname}/client/public/uploads/${newFileName}`;
+        returnRouteFront =  uploadPathForFile.replace(/\\/g, "/");
+    }
+    else {
+        // On STAGING or PROD, we assign correctly the files
+        uploadPathForFile = `..${PATH_FILES}/${newFileName}`;
+        returnRouteFront =  `${SERVICE}${CONTEXT1}/files/${newFileName}`;
+    }
 
     file.mv(uploadPathForFile, err => {
         if (err) {
             return res.status(500).send(err);
         }
-        res.json({ oldFileName: oldFileName, newFileName: newFileName, filePath: uploadPathForFile.replace(/\\/g, "/") });
+        res.json({ oldFileName: oldFileName, newFileName: newFileName, filePath: returnRouteFront });
     });
 });
 
