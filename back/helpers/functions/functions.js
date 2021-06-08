@@ -6,16 +6,20 @@ function logWithFormat(message){
 }
 
 //
-// Creates an id given the length needed
+// Creates a reference for this moment
 //
-function makeIdShort(length = 8) {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
+function createThisMomentReference() {
+
+    const thisMoment = new Date();
+
+    const thisMomentDate = String(thisMoment.getDate());
+    const thisMomentMonth = String(thisMoment.getMonth() + 1);
+    const thisMomentYear = String(thisMoment.getFullYear());
+    const thisMomentHours = String(thisMoment.getHours());
+    const thisMomentMinutes = String(thisMoment.getMinutes());
+    const thisMomentSeconds = String(thisMoment.getSeconds());
+
+    return (thisMomentDate + thisMomentMonth + thisMomentYear + thisMomentHours + thisMomentMinutes + thisMomentSeconds);
 }
 
-module.exports = { logWithFormat, makeIdShort };
+module.exports = { logWithFormat, createThisMomentReference };
