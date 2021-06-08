@@ -146,7 +146,7 @@ app.post((CONTEXT_PATH_1 + '/api/upload-file'), (req, res) => {
     else {
         // On STAGING or PROD, we assign correctly the files
         uploadPathForFile = `..${PATH_FILES}/${newFileName}`;
-        returnRouteFront =  `${SERVICE}${CONTEXT1}/files/${newFileName}`;
+        returnRouteFront =  `${SERVICE}${CONTEXT_PATH_1}/files/${newFileName}`;
     }
 
     file.mv(uploadPathForFile, err => {
