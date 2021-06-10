@@ -29,7 +29,8 @@ function EditionComponent({ portalName, sections, documents, setSectionsCallback
     // Logic to create or edit a section
 
     const openModal = (sectionToEdit = {}, documentsToEdit = []) => {
-        if (sectionToEdit !== {} && sectionToEdit.title) {
+        // We check for position because ALL sections should have a position defined
+        if (sectionToEdit !== {} && sectionToEdit.position) {
             setSectionToEdit(sectionToEdit);
             setDocumentsToEdit([...documentsToEdit]);
             setDocumentsToDelete([...documentsToEdit]);

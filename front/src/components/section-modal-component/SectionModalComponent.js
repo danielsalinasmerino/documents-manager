@@ -19,7 +19,6 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
     const portalName = routingInfo.portalName;
 
     const [titleSection, setTitleSection] = useState("");
-    const [errorTitle, setErrorTitle] = useState(false);
 
     const [contentSection, setContentSection] = useState("");
     const [errorContent, setErrorContent] = useState(false);
@@ -71,12 +70,10 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
 
     const saveSection = () => {
         // First we check the posible errors
-        const titleSectionError = checkTitleSectionErrors();
         const documentError = checkDocumentErrors();
 
-        if (titleSectionError || documentError || errorContent || documentsSameNameError || documentsOnlyURLSameNameError) {
+        if (documentError || errorContent || documentsSameNameError || documentsOnlyURLSameNameError) {
             // If we find errors we let the user know them
-            (titleSectionError && setErrorTitle(true));
         }
         else {
             // If we do not find errors we save the section
@@ -147,12 +144,10 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
 
     const editSection = () => {
         // First we check the posible errors        
-        const titleSectionError = checkTitleSectionErrors();
         const documentError = checkDocumentErrors();
 
-        if (titleSectionError || documentError || errorContent || documentsSameNameError || documentsOnlyURLSameNameError) {
-            // If we find errors on the title we let the user know them            
-            (titleSectionError && setErrorTitle(true));
+        if (documentError || errorContent || documentsSameNameError || documentsOnlyURLSameNameError) {
+            // If we find errors on the title we let the user know them   
         }
         else {
             // If we do not find errors we save the section            
@@ -178,11 +173,6 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
         }
     }
 
-    const checkTitleSectionErrors = () => {
-        const titleSectionTrim = titleSection.trim();
-        return (titleSectionTrim.length === 0);
-    }
-
     const checkDocumentErrors = () => {
         var documentError = false;
         const allDocuments = documentsArray.concat(documentsOnlyURLArray);
@@ -194,7 +184,6 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
 
     const onChangeTitleSection = (e) => {
         setTitleSection(e.target.value);
-        setErrorTitle(false);
     }
 
     const onChangeContentSection = (e) => {
@@ -284,7 +273,7 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
         <div className="sectionModalWrapper">
             <SectionModalHeader title={editSectionMode ? 'Editar sección' : 'Nueva sección'} closeCallback={closeModal} />
 
-            <SectionTextInput titleText={"Título"} errorMark={errorTitle} styleValue={"ownInput"} placeHolderText={"Escriba el título de la sección (obligatorio)"}
+            <SectionTextInput titleText={"Título"} errorMark={false} styleValue={"ownInput"} placeHolderText={"Escriba el título de la sección (opcional)"}
                 identifier={"titleSection"} valueToShow={titleSection} onChangeCallback={onChangeTitleSection} />
 
             <SectionTextInput titleText={"Contenido"} errorMark={errorContent} styleValue={"ownTextarea"} placeHolderText={"Escriba el contenido de la sección (opcional)"}
