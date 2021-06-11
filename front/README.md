@@ -1,3 +1,52 @@
+# Gestor documental
+
+(Se deja el *README* original que acompaña a los desarrollos con *Create React App* por comodidad).
+
+## Posibles despliegues
+
+Actualmente se puede desplegar la aplicación tanto en local (o desarrollo) como en pruebas (o pruebas/*staging*).
+
+### Desplegar en local
+
+Ideal para hacer desarrollos normales o cambios, más cómodo. Para trabajar en local, habrá que realizar estos cambios:
+
+1. En el fichero *environment.js*, marcar la constante _**DEV**_ en _**true**_ y las otras en _**false**_.
+2. En el fichero *App.js*, deshabilitar la autenticación por el *CAS*. Podemos conseguir esto cambiando:
+
+```
+const [possibleEditor, setPossibleEditor] = useState(false);
+```
+
+por:
+
+```
+const [possibleEditor, setPossibleEditor] = useState(true);
+```
+
+y cambiando:
+
+```
+catch {
+    setPossibleEditor(false);
+}
+```
+
+por
+
+```
+catch {
+    setPossibleEditor(true);
+}
+```
+
+Una vez hayamos completado estos pasos, es tan sencillo como correr **npm start** y podremos probar nuestra aplicación en **localhost:4200**.
+
+### Desplegar en pruebas
+
+Si queremos preparar el front para un despliegue en pruebas, debemos correr **npm run build** y copiar los resultados de la carpeta **build** que se genera en **back/client/build**.
+
+Con esto es suficiente por parte del front. Los demás pasos para el despliegue en pruebas se pueden consultar en el *README.md* del back.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
