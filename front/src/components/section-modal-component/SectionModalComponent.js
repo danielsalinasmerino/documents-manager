@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import DocumentsFormatInput from '../documents-format-input/DocumentsFormatInput';
 import SectionModalBottomButtons from '../section-modal-bottom-buttons/SectionModalBottomButtons';
 import SectionDocumentsInput from '../section-documents-input/SectionDocumentsInput';
 import SectionPositionInput from '../section-position-input/SectionPositionInput';
@@ -32,6 +33,9 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
     const [documentsOnlyURLArray, setDocumentsOnlyURLArray] = useState([]);
     const [documentsOnlyURLSameNameError, setDocumentsOnlyURLSameNameError] = useState(false);
 
+    const documentsFormatArray = [{ value: "list", label: "en lista." }, { value: "inline", label: "en línea." }];
+    const [documentsFormat, setDocumentsFormat] = useState("list");
+
     useEffect(() => {
         var positionsArray = [];
         const sectiongsLengthHelper = sectiongsLength + 2;
@@ -61,6 +65,7 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
             positionsArray.pop();
             setPostitionsArray(positionsArray);
             setPostition(sectionToEdit.position);
+            setDocumentsFormat(sectionToEdit.documentsFormat);
         }
         else {
             setPostitionsArray(positionsArray);
@@ -85,7 +90,8 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
                 new Date(),
                 position,
                 null, // To do (parentID)
-                portalName
+                portalName,
+                documentsFormat
             );
             const allDocuments = documentsArray.concat(documentsOnlyURLArray);
             for (let i = 0; i < allDocuments.length; i++) {
@@ -98,7 +104,7 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
     }
 
     const createNewDocumentAndSaveCallback = (documentData, parentSectionID) => {
-        if(documentData.onlyURL){
+        if (documentData.onlyURL) {
             const newDocument = new Document(
                 makeId(),
                 documentData.title.trim(),
@@ -115,27 +121,27 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
         else {
             var formdata = new FormData();
             formdata.append("file", documentData.documentUrl);
-    
+
             var requestOptions = {
                 method: 'POST',
                 body: formdata,
                 redirect: 'follow'
             };
-    
+
             fetch(uploadFileEndpoint, requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     const newDocument = new Document(
                         makeId(),
                         documentData.title.trim(),
-                        result.filePath, 
+                        result.filePath,
                         new Date(),
                         new Date(),
                         parentSectionID,
                         documentData.onlyURL,
                         documentData.originalDocumentName
                     );
-    
+
                     saveDocumentCallback(newDocument);
                 })
                 .catch(error => console.log('error', error));
@@ -157,6 +163,7 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
             sectionEditted.oldPosition = sectionEditted.position;
             sectionEditted.position = position;
             sectionEditted.updatedAt = new Date();
+            sectionEditted.documentsFormat = documentsFormat;
             const allDocuments = documentsArray.concat(documentsOnlyURLArray);
             for (let i = 0; i < allDocuments.length; i++) {
                 if (allDocuments[i].title.length !== 0) {
@@ -283,6 +290,8 @@ function SectionModalComponent({ sectiongsLength, saveSectionCallBack, saveDocum
 
             <SectionDocumentsInput addDocumentCallback={addDocument} onChangeDocumentCallback={onChangeDocument} onChangeTitleDocumentCallback={onChangeTitleDocument} deleteDocumentCallback={deleteDocument}
                 documentsArray={documentsArray} documentsOnlyURLArray={documentsOnlyURLArray} documentsSameNameError={documentsSameNameError} documentsOnlyURLSameNameError={documentsOnlyURLSameNameError} />
+
+            <DocumentsFormatInput editSectionMode={editSectionMode} sectionToEdit={sectionToEdit} documentsFormatArray={documentsFormatArray} setDocumentsFormatCallback={setDocumentsFormat} />
 
             <SectionModalBottomButtons cancelText={'Cancelar'} cancelCallback={closeModal} confirmText={'Guardar'} confirmCallback={editSectionMode ? editSection : saveSection} />
         </div>

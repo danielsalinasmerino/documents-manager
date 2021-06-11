@@ -6,7 +6,8 @@ export class Section {
                 updatedAt,   // Mandatory 
                 position,    // Mandatory 
                 parentID,
-                portalID     // Mandatory 
+                portalID,     // Mandatory
+                documentsFormat 
                 ) {
       this.idSection = idSection;
       this.title = title;
@@ -16,5 +17,6 @@ export class Section {
       this.position = position;
       this.parentID = parentID;
       this.portalID = portalID;
+      this.documentsFormat = documentsFormat;
     }
 }
