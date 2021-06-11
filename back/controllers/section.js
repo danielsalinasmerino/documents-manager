@@ -20,6 +20,7 @@ var controller = {
         section.position = params.position;
         section.parentID = params.parentID;
         section.portalID = params.portalID;
+        section.documentsFormat = params.documentsFormat;
 
         section.save((err, sectionStored) => {
             if(err) return res.status(500).send({message: "Error on Create Section."});

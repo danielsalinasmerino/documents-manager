@@ -12,6 +12,7 @@ var SectionSchema = Schema({
     position: Number,
     parentID: String,
     portalID: String,
+    documentsFormat: String
 });
 
 module.exports = mongoose.model('Section', SectionSchema);

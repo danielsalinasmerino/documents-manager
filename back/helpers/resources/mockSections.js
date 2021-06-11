@@ -11,7 +11,8 @@ const mockSections = [
         updatedAt: new Date(2021, 2, 2, 0, 0, 0, 0),
         position: 1, 
         parentID: null, // To do (parentID)
-        portalID: 'pas'  
+        portalID: 'pas',
+        documentsFormat: "inline"   
     },
 
     {
@@ -22,7 +23,8 @@ const mockSections = [
         updatedAt: new Date(2021, 2, 3, 0, 0, 0, 0),
         position: 2, 
         parentID: null, // To do (parentID)
-        portalID: 'pas'
+        portalID: 'pas',
+        documentsFormat: "list"
     },
 
     {
@@ -33,7 +35,8 @@ const mockSections = [
         updatedAt: new Date(2021, 2, 5, 0, 0, 0, 0),
         position: 3, 
         parentID: null, // To do (parentID)
-        portalID :null  // To do (portalID)
+        portalID : 'pas',
+        documentsFormat: "list"
     },
 
     {
@@ -44,7 +47,8 @@ const mockSections = [
         updatedAt: new Date(2021, 2, 8, 0, 0, 0, 0),
         position: 4, 
         parentID: null, // To do (parentID)
-        portalID: 'pas'
+        portalID: 'pas',
+        documentsFormat: "list"
     },
 
     {
@@ -55,7 +59,8 @@ const mockSections = [
         updatedAt: new Date(2021, 1, 2, 0, 0, 0, 0),
         position: 5, 
         parentID: null, // To do (parentID)
-        portalID: 'pas'
+        portalID: 'pas',
+        documentsFormat: "list"
     },
 
     {
@@ -66,7 +71,8 @@ const mockSections = [
         updatedAt: new Date(2021, 2, 10, 0, 0, 0, 0),
         position: 6, 
         parentID: null, // To do (parentID)
-        portalID: 'pas'
+        portalID: 'pas',
+        documentsFormat: "inline"
     },
 
     {
@@ -77,7 +83,8 @@ const mockSections = [
         updatedAt: new Date(2021, 1, 12, 0, 0, 0, 0),
         position: 7, 
         parentID: null, // To do (parentID)
-        portalID: 'pas'
+        portalID: 'pas',
+        documentsFormat: "inline"
     },
 
 ];

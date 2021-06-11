@@ -32,6 +32,7 @@ function createNewSectionWithMockData(data){
     section.position = data.position;
     section.parentID = data.parentID;
     section.portalID = data.portalID;
+    section.documentsFormat = data.documentsFormat;
     return section;
 }
 
