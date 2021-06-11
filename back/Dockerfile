@@ -11,4 +11,4 @@ COPY . .
 
 # start app (in case we want to start the App, use: CMD ["npm", "start"])
 # start app (in case we want to populate the DB, use: CMD ["npm", "run", "populate"])
-CMD ["npm", "run", "populate"]
+CMD ["npm", "start"]
