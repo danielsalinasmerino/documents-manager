@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Gestor documental
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Posibles despliegues
 
-## Available Scripts
+Actualmente se puede desplegar la aplicación tanto en local (o desarrollo) como en pruebas (o pruebas/*staging*).
 
-In the project directory, you can run:
+### Desplegar en local
 
-### `npm start`
+Ideal para hacer desarrollos normales o cambios, más cómodo. Para trabajar en local, habrá que realizar estos cambios:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. El fichero _**.env**_, cambiarlo entero por el contenido del fichero _**../env/local.env**_.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Una vez hayamos completado estos pasos, es tan sencillo como correr **npm start** y tendremos nuestra aplicación corriendo (la parte del *BACK*).
 
-### `npm test`
+### Desplegar en pruebas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para desplegar el pruebas, es suficiente con conectarnos a _**host027**_ (via *SSH*) y desde el *root* de nuestro proyecto correr _**docker-compose build**_ y después _**docker-compose up**_. Realmente, estaremos corriendo todo el proyecto, no sólo desplegando el *BACK*.
 
-### `npm run build`
+## Otras consideraciones
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Popular la Base de Datos
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Si se quiere, se puede popular la base de datos con una serie de datos que se encuentran en _**helpers/resources**_ (se pueden añadir nuevos usuarios, secciones... si es necesario). Popular la base de datos borra todo el contenido anterior y genera nuevo contenido basado en los archivos *mock's*. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Para popular en _**local**_, es suficiente con correr _**npm run populate**_ en lugar de *npm start*.
 
-### `npm run eject`
+Para popular en nuestro despliegue en _**pruebas**_ , es suficiente con _**cambiar en Dockerfile, CMD ["npm", "start"] por CMD ["npm", "run", "populate"]**_.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Usuarios de rol administrador
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Al hacer un despliegue en *local* o en *pruebas*, siempre se comprueba que haya al menos un usuario con derechos de administrador (en este caso, se puede consultar el archivo _**helpers/resources/adminUsers.js**_). Si existe, no pasa nada, si no, se crea. Lo normal es que exista puesto que desde el *front* no se permite al usuario editar o borrar a este tipo de usuarios.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
