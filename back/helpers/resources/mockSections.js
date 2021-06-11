@@ -12,7 +12,7 @@ const mockSections = [
         position: 1, 
         parentID: null, // To do (parentID)
         portalID: 'pas',
-        documentsFormat: "inline"   
+        documentsFormat: "list"   
     },
 
     {
@@ -36,7 +36,7 @@ const mockSections = [
         position: 3, 
         parentID: null, // To do (parentID)
         portalID : 'pas',
-        documentsFormat: "list"
+        documentsFormat: "inline"
     },
 
     {
@@ -72,7 +72,7 @@ const mockSections = [
         position: 6, 
         parentID: null, // To do (parentID)
         portalID: 'pas',
-        documentsFormat: "inline"
+        documentsFormat: "list"
     },
 
     {
@@ -84,7 +84,7 @@ const mockSections = [
         position: 7, 
         parentID: null, // To do (parentID)
         portalID: 'pas',
-        documentsFormat: "inline"
+        documentsFormat: "list"
     },
 
 ];

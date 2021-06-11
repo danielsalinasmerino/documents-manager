@@ -14,22 +14,23 @@ function SectionsComponent({ sections, documents, editableSections, editSectionC
         deleteSectionCallback(element);
     }
 
-    const  getSectionDocuments = (idSection) => {
+    const getSectionDocuments = (idSection) => {
         return documents.filter(document => { return document.sectionID === idSection });
     }
 
     return (
         <div>
-            { 
-                sections.map(element => 
-                    <SectionComponent 
-                        key={element.idSection} 
+            {
+                sections.map(element =>
+                    <SectionComponent
+                        key={element.idSection}
                         editableSection={editableSections}
-                        title={element.title} 
+                        title={element.title}
                         description={element.description}
                         documents={getSectionDocuments(element.idSection)}
                         clickEditButtonCallback={() => clickEditButton(element, getSectionDocuments(element.idSection))}
-                        clickDeleteButtonCallback={() => clickDeleteButton(element)}/>
+                        clickDeleteButtonCallback={() => clickDeleteButton(element)}
+                        format={element.documentsFormat} />
                 )
             }
         </div>
