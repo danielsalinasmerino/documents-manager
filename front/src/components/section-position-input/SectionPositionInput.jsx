@@ -7,9 +7,9 @@ function SectionPositionInput({ editSectionMode, sectionToEdit, sectiongsLength,
     
 
     return (
-        <div className="inputWrapper">
-            <p className="inputTitle">Posición</p>
-            <div className="ownSelector">
+        <div className="inputWrapper" style={inputWrapperInline}>
+            <p className="inputTitle" style={inputTitleFixed}>Posición</p>
+            <div className="ownSelector" style={ownSelectorFixed}>
                 <Select 
                     defaultValue={editSectionMode ?                             
                         {value: sectionToEdit.position, label: (sectionToEdit.position).toString()} :                             
@@ -20,6 +20,19 @@ function SectionPositionInput({ editSectionMode, sectionToEdit, sectiongsLength,
             </div>
         </div>
     );
+}
+
+// We declare special styles for this type of input to avoid code repetition
+const inputWrapperInline = {
+    flexDirection: "row"
+}
+
+const inputTitleFixed = {
+    marginRight: 20,
+}
+
+const ownSelectorFixed = {
+    width: 80
 }
 
 export default SectionPositionInput;
