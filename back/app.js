@@ -73,53 +73,64 @@ app.use(session({
 
 // We configure the routes and also CAS
 const path = require('path');
+let loginCas;
 if (DEV_ENVIRONMENT) {
-    app.use(normalize(CONTEXT_PATH_1), express.static(path.resolve(__dirname, './client/build')));
-    app.use(normalize(CONTEXT_PATH_2), express.static(path.resolve(__dirname, './client/build')));
-    app.use(normalize(CONTEXT_PATH_3), express.static(path.resolve(__dirname, './client/build')));
+    loginCas = function (req, res, next) {
+        next();
+    }
 }
 else {
-    app.use(normalize(CONTEXT_PATH_1), express.static(path.join(__dirname, 'client/build')));
-    app.use(normalize(CONTEXT_PATH_2), express.static(path.join(__dirname, 'client/build')));
-    app.use(normalize(CONTEXT_PATH_3), express.static(path.join(__dirname, 'client/build')));
     // If we are not on DEV (we are on PRUEBAS or PROD), we activate the CAS service
-    app.get((CONTEXT_PATH_1 + '/edicion-contenidos'), cas.bounce, function (req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
-    });
-    app.get((CONTEXT_PATH_2 + '/edicion-contenidos'), cas.bounce, function (req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
-    });
-    app.get((CONTEXT_PATH_3 + '/edicion-contenidos'), cas.bounce, function (req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
-    });
-    app.get((CONTEXT_PATH_1 + '/gestion-editores'), cas.bounce, function (req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
-    });
-    app.get((CONTEXT_PATH_2 + '/gestion-editores'), cas.bounce, function (req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
-    });
-    app.get((CONTEXT_PATH_3 + '/gestion-editores'), cas.bounce, function (req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
-    });
-    app.get((CONTEXT_PATH_1 + '/vista-previa'), function (req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
-    });
-    app.get((CONTEXT_PATH_2 + '/vista-previa'), function (req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
-    });
-    app.get((CONTEXT_PATH_3 + '/vista-previa'), function (req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
-    });
+    loginCas = cas.bounce;
 }
+
+app.use(normalize(CONTEXT_PATH_1), express.static(path.join(__dirname, 'client/build')));
+app.use(normalize(CONTEXT_PATH_2), express.static(path.join(__dirname, 'client/build')));
+app.use(normalize(CONTEXT_PATH_3), express.static(path.join(__dirname, 'client/build')));
+
+app.get((CONTEXT_PATH_1 + '/edicion-contenidos'), loginCas, function (req, res) {
+    res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
+});
+app.get((CONTEXT_PATH_2 + '/edicion-contenidos'), loginCas, function (req, res) {
+    res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
+});
+app.get((CONTEXT_PATH_3 + '/edicion-contenidos'), loginCas, function (req, res) {
+    res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
+});
+app.get((CONTEXT_PATH_1 + '/gestion-editores'), loginCas, function (req, res) {
+    res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
+});
+app.get((CONTEXT_PATH_2 + '/gestion-editores'), loginCas, function (req, res) {
+    res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
+});
+app.get((CONTEXT_PATH_3 + '/gestion-editores'), loginCas, function (req, res) {
+    res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
+});
+app.get((CONTEXT_PATH_1 + '/vista-previa'), function (req, res) {
+    res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
+});
+app.get((CONTEXT_PATH_2 + '/vista-previa'), function (req, res) {
+    res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
+});
+app.get((CONTEXT_PATH_3 + '/vista-previa'), function (req, res) {
+    res.sendFile('index.html', { root: path.join(__dirname, 'client/build') });
+});
 
 // We create a route to let the Front know which CAS user we are
 app.get((CONTEXT_PATH_1 + '/api/user-logged'), function routeHandler(req, res) {
-    //res.json({mail: "Email"});
+    //res.json({mail: ["Email"]});
+    if (DEV_ENVIRONMENT) {
+        if (!req.session.user) req.session.user = {};
+        // employeetype puede ser un string o un array pq luego se convierte a array
+        req.session.user.mail = process.env.USER_DEV_EMAIL || 'secretario.etsit@upm.es';
+        req.session.user.cn = 'FERNANDO FERNANDEZ FERNANDEZ';
+        req.session.user.givenname = 'FERNANDO';
+    }
     res.json(req.session.user);
 });
 
 // We "trick" the routes to recover correctly the files that we store if we are not on DEV
-if(!DEV_ENVIRONMENT){
+if (!DEV_ENVIRONMENT) {
     app.use(
         path.join(CONTEXT_PATH_1, 'files'),
         express.static(PATH_FILES)
@@ -138,15 +149,15 @@ app.post((CONTEXT_PATH_1 + '/api/upload-file'), (req, res) => {
     const newFileName = functions.createThisMomentReference() + '-' + oldFileName;
     var uploadPathForFile;
     var returnRouteFront;
-    if(DEV_ENVIRONMENT){
+    if (DEV_ENVIRONMENT) {
         // On local, we play with the documents
         uploadPathForFile = `${__dirname}/client/public/uploads/${newFileName}`;
-        returnRouteFront =  uploadPathForFile.replace(/\\/g, "/");
+        returnRouteFront = uploadPathForFile.replace(/\\/g, "/");
     }
     else {
         // On STAGING or PROD, we assign correctly the files
         uploadPathForFile = `..${PATH_FILES}/${newFileName}`;
-        returnRouteFront =  `${SERVICE}${CONTEXT_PATH_1}/files/${newFileName}`;
+        returnRouteFront = `${SERVICE}${CONTEXT_PATH_1}/files/${newFileName}`;
     }
 
     file.mv(uploadPathForFile, err => {

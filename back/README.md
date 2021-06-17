@@ -12,9 +12,20 @@ Ideal para hacer desarrollos normales o cambios, más cómodo. Para trabajar en 
 
 Una vez hayamos completado estos pasos, es tan sencillo como correr **npm start** y tendremos nuestra aplicación corriendo (la parte del *BACK*).
 
+- Acceder a: [http://localhost:3009/pas/gestor-documental](http://localhost:3009/pas/gestor-documental)
+- Acceder a: [http://localhost:3009/pdi/gestor-documental](http://localhost:3009/pdi/gestor-documental)
+
 ### Desplegar en pruebas
 
-Para desplegar el pruebas, es suficiente con conectarnos a _**host027**_ (via *SSH*) y desde el *root* de nuestro proyecto correr _**docker-compose build**_ y después _**docker-compose up**_. Realmente, estaremos corriendo todo el proyecto, no sólo desplegando el *BACK*.
+Para desplegar el pruebas, es suficiente con conectarnos a _**host027**_ (via *SSH*) y desde el *root* de nuestro proyecto correr _**docker-compose build**_ y después _**docker-compose up**_.
+
+- Acceder a: [https://pruebas.etsit.upm.es/pas/gestor-documental](https://pruebas.etsit.upm.es/pas/gestor-documental)
+- Acceder a: [https://pruebas.etsit.upm.es/pdi/gestor-documental](https://pruebas.etsit.upm.es/pdi/gestor-documental)
+
+### Desplegar en producción
+
+- Acceder a: [https://portal.etsit.upm.es/pas/gestor-documental](https://portal.etsit.upm.es/pas/gestor-documental)
+- Acceder a: [https://portal.etsit.upm.es/pdi/gestor-documental](https://portal.etsit.upm.es/pdi/gestor-documental)
 
 ## Otras consideraciones
 

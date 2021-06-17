@@ -9,7 +9,7 @@ require('dotenv').config();
 const functions = require('./helpers/functions/functions');
 
 // Environment variables
-const port = process.env.PORT;
+const port = process.env.PORT || 3009;
 const connectionDB = process.env.CONNECTION_DB;
 
 // Required models

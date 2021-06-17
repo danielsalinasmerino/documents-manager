@@ -8,36 +8,7 @@ Actualmente se puede desplegar la aplicación tanto en local (o desarrollo) como
 
 ### Desplegar en local
 
-Ideal para hacer desarrollos normales o cambios, más cómodo. Para trabajar en local, habrá que realizar estos cambios:
-
-1. En el fichero *environment.js*, marcar la constante _**DEV**_ en _**true**_ y las otras en _**false**_.
-2. En el fichero *App.js*, deshabilitar la autenticación por el *CAS*. Podemos conseguir esto cambiando:
-
-```
-const [possibleEditor, setPossibleEditor] = useState(false);
-```
-
-por:
-
-```
-const [possibleEditor, setPossibleEditor] = useState(true);
-```
-
-y cambiando:
-
-```
-catch {
-    setPossibleEditor(false);
-}
-```
-
-por
-
-```
-catch {
-    setPossibleEditor(true);
-}
-```
+Ideal para hacer desarrollos normales o cambios, más cómodo. Para trabajar en local, habrá que arrancar también el servidor. Que es quien atiende las peticiones.
 
 Una vez hayamos completado estos pasos, es tan sencillo como correr **npm start** y podremos probar nuestra aplicación en **localhost:4200**.
 
