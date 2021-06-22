@@ -19,7 +19,7 @@ function SectionsComponent({ sections, documents, editableSections, editSectionC
     }
 
     return (
-        <div>
+        <div className="sectionsWrapper">
             {
                 sections.map(element =>
                     <SectionComponent
