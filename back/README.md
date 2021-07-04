@@ -2,13 +2,15 @@
 
 ## Posibles despliegues
 
-Actualmente se puede desplegar la aplicación tanto en local (o desarrollo) como en pruebas (o pruebas/*staging*).
+Actualmente se puede desplegar la aplicación tanto en local (o desarrollo) como en pruebas (o pruebas/*staging*). Para cada entorno existe una plantilla de variables de entorno en la carpeta **`env/`**. 
+    - Si se despliega con Docker debe cambiarse en el docker-compose.override.yml la ruta del fichero con las variables de entorno correspondiente.
+    - Si se despliega directamente desde el host se debe cambiar el contenido del fichero **`.env`** por el del entorno correspondiente.
 
 ### Desplegar en local
 
 Ideal para hacer desarrollos normales o cambios, más cómodo. Para trabajar en local, habrá que realizar estos cambios:
 
-1. El fichero _**.env**_, cambiarlo entero por el contenido del fichero _**../env/local.env**_.
+1. (Sin Docker) El fichero _**.env**_, cambiarlo entero por el contenido del fichero _**../env/local.env**_.
 
 Una vez hayamos completado estos pasos, es tan sencillo como correr **npm start** y tendremos nuestra aplicación corriendo (la parte del *BACK*).
 
