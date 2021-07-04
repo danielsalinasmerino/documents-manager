@@ -11,13 +11,5 @@ services:
     volumes:
         - .:/usr/src/app
         - gestordoc:/storage/gestordoc/files
-  mongo:
-    container_name: db_documents_manager
-    image: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - db_documents_manager:/data/db
 volumes:
-  db_documents_manager:
   gestordoc:

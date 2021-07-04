@@ -1,0 +1,14 @@
+version: '3'
+services:
+  node:
+    env_file:
+      - ./env/local_docker.env
+  mongo:
+    container_name: db_documents_manager
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - db_documents_manager:/data/db
+volumes:
+  db_documents_manager:
