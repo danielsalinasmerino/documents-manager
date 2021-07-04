@@ -3,8 +3,9 @@
 ## Posibles despliegues
 
 Actualmente se puede desplegar la aplicación tanto en local (o desarrollo) como en pruebas (o pruebas/*staging*). Para cada entorno existe una plantilla de variables de entorno en la carpeta **`env/`**. 
-    - Si se despliega con Docker debe cambiarse en el docker-compose.override.yml la ruta del fichero con las variables de entorno correspondiente.
-    - Si se despliega directamente desde el host se debe cambiar el contenido del fichero **`.env`** por el del entorno correspondiente.
+
+- Si se despliega con Docker debe cambiarse en el docker-compose.override.yml la ruta del fichero con las variables de entorno correspondiente.
+- Si se despliega directamente desde el host se debe cambiar el contenido del fichero **`.env`** por el del entorno correspondiente.
 
 ### Desplegar en local
 
