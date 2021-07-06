@@ -17,6 +17,7 @@ function PreviewButtonsMenuComponent() {
 
     return (
         <div className="buttonsMenuReversed">
+            <h1>Bienvenido/a</h1>
             <a className="link-clean" href={routeEdition}>
                 <StyledButtonComponent buttonText={'Activar Vista de Edición'} />
             </a>
